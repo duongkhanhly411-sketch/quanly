@@ -5,145 +5,242 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overview - Group 8 Dashboard</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ================= RESET CHUNG ================= */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* CSS viết theo từng dòng nhỏ đúng chuẩn giáo trình */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #e5e5e5; font-family: 'Poppins', sans-serif;
-            color: #141522; height: 100vh; display: flex;
-            justify-content: center; align-items: center; overflow: hidden;
+            background-color: #e5e5e5;
+            font-family: 'Poppins', sans-serif;
+            color: #141522;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
-        ::-webkit-scrollbar { display: none; }
 
-        /* Bố cục chính */
         .app-container {
-            width: 1440px; height: 944px; background: #F3F4F8;
-            border-radius: 20px; position: relative;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.15); overflow: hidden; display: flex;
+            width: 1440px;
+            height: 944px;
+            background-color: #F3F4F8;
+            border-radius: 20px;
+            position: relative;
+            display: flex;
+            overflow: hidden;
         }
 
-        /* ================= MÀN HÌNH ĐĂNG NHẬP ================= */
-        /* Mặc định ẩn để dễ chấm bài, nếu muốn hiện thì đổi display: none thành display: flex */
-        .auth-container {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: #F3F4F8; display: none; justify-content: center; align-items: center; z-index: 1000; 
+        /* SIDEBAR */
+        .sidebar {
+            width: 250px;
+            background-color: #FFFFFF;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
         }
-        .auth-box {
-            background: #FFFFFF; border: 1px solid rgba(102, 102, 102, 0.3); border-radius: 24px;
-            width: 640px; padding: 40px 56px; display: flex; flex-direction: column; align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
         }
-        .auth-box h2 { font-size: 32px; font-weight: 500; color: #333; margin: 20px 0 40px 0; text-align: center;}
-        .form-group { width: 100%; margin-bottom: 24px; position: relative; }
-        .form-group label { display: block; font-size: 16px; color: #666666; margin-bottom: 5px; }
-        .form-group input { width: 100%; height: 56px; border: 1px solid rgba(102, 102, 102, 0.35); border-radius: 12px; padding: 0 20px; font-family: 'Poppins'; font-size: 16px;}
-        .form-group input:focus { border-color: #546FFF; outline: none;} 
-        .btn-auth { width: 100%; height: 64px; border-radius: 40px; border: none; background: #111; color: white; font-size: 20px; font-weight: 500; font-family: 'Poppins'; cursor: pointer; margin-top: 10px;}
-        .btn-auth:hover { background: #546FFF; } 
-        .auth-form { width: 100%; display: flex; flex-direction: column; align-items: center; } 
-        .auth-footer { position: absolute; bottom: 0; left: 0; width: 100%; height: 56px; background: white; border-top: 1px solid rgba(102,102,102,0.25); display: flex; justify-content: center; align-items: center; gap: 40px; font-size: 14px; color: #666;}
 
-        /* ================= SIDEBAR ================= */
-        .sidebar { width: 250px; background: #FFFFFF; padding: 40px 20px; display: flex; flex-direction: column; border-radius: 20px 0 0 20px; z-index: 10;}
-        .logo { display: flex; align-items: center; gap: 15px; margin-bottom: 60px; padding-left: 10px; }
-        .logo i { font-size: 32px; color: #141522; }
-        .logo span { font-family: 'Montserrat'; font-size: 32px; font-weight: 600; }
-        .nav-menu { display: flex; flex-direction: column; gap: 15px; }
-        
-        /* Chuyển menu thành thẻ a chuẩn sinh viên */
-        .nav-item { 
-            text-decoration: none; color: #141522; display: flex; align-items: center; gap: 15px; 
-            padding: 15px 20px; border-radius: 10px; font-size: 18px; font-weight: 600; opacity: 0.6; 
+        .nav-item {
+            text-decoration: none;
+            color: #141522;
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            opacity: 0.6;
         }
-        .nav-item:hover { opacity: 1; background: #f5f5f7; } 
-        .nav-item.active { background: #F5F5F7; opacity: 1; }
-        .nav-item.active i { color: #546FFF; }
 
-        /* ================= HEADER ================= */
-        .main-wrapper { flex: 1; position: relative; padding: 40px; display: flex; flex-direction: column;}
-        .header { height: 80px; background: #FFFFFF; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; margin-bottom: 40px; position: relative; z-index: 50; box-shadow: 0 2px 10px rgba(0,0,0,0.02); flex-shrink: 0;}
-        .search-bar { background: #F5F5F7; width: 300px; height: 45px; border-radius: 30px; display: flex; align-items: center; padding: 0 20px; gap: 10px; }
-        .search-bar input { border: none; background: transparent; outline: none; font-family: 'Poppins'; font-size: 16px; width: 100%;}
-        .header-actions { display: flex; align-items: center; gap: 30px; position: relative;}
-        
-        .noti-btn { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 24px;}
-        .noti-btn:hover { background: #F5F5F7; }
-        .user-profile { display: flex; align-items: center; gap: 15px; cursor: pointer; padding: 5px 10px; border-radius: 30px;}
-        .user-profile:hover { background: #F5F5F7; }
-        .avatar { width: 45px; height: 45px; background: #e0e0e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .nav-item.active {
+            background-color: #F5F5F7;
+            opacity: 1;
+        }
 
-        /* Dropdown Ẩn */
-        .dropdown { position: absolute; background: #FFFFFF; border: 2px solid #F5F5F7; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: none; z-index: 100; }
-        .dropdown.show { display: block; }
-        .noti-drop { top: 60px; right: 200px; width: 280px; padding: 15px; }
-        .noti-header { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 15px; }
-        .noti-header i { cursor: pointer; }
-        .noti-header i:hover { color: red; } 
-        .noti-body { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500;}
-        .profile-drop { top: 60px; right: 0; width: 230px; padding: 10px; display: flex; flex-direction: column; gap: 5px;}
-        .drop-item { display: flex; align-items: center; gap: 15px; padding: 12px 15px; font-weight: 600; font-size: 18px; border-radius: 10px; cursor: pointer; }
-        .drop-item:hover { background: #F5F5F7; color: #546FFF; }
+        .nav-item i {
+            margin-right: 15px;
+            font-size: 20px;
+        }
 
-        /* ================= NỘI DUNG OVERVIEW ================= */
-        .page-content { flex: 1; overflow-y: auto; padding-bottom: 20px;}
-        .card { background: #FFFFFF; border-radius: 20px; }
-        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 30px; }
-        .stat-card { height: 160px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; }
-        .stat-title { font-size: 18px; font-weight: 500; display: flex; align-items: center; gap: 10px; color: #141522;}
-        .stat-num { font-size: 36px; font-weight: 700; }
+        /* MAIN CONTENT */
+        .main-wrapper {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
 
-        .main-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px; }
-        .chart-card { padding: 30px; height: 380px; display: flex; flex-direction: column; padding-bottom: 0;}
-        .chart-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
-        
-        .recent-card { margin-top: 30px; padding: 25px 30px; display: flex; align-items: center; gap: 20px; height: 120px;}
-        .recent-card h3 { font-size: 20px; font-weight: 700; white-space: nowrap; }
-        .activity-tags { display: flex; gap: 15px; overflow-x: auto;}
-        .tag { background: #F7F7F7; padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .tag:hover { background: #e2e4ff; color: #546FFF; }
-        .tag-icon { width: 28px; height: 28px; background: #7784EE; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-size: 12px;}
+        .header {
+            height: 80px;
+            background-color: #FFFFFF;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            margin-bottom: 40px;
+        }
 
-        .deadline-card { padding: 30px; height: 530px; }
-        .deadline-card h3 { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 20px; }
-        .dl-item { display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); cursor: pointer;}
-        .dl-item:hover { background: #fafafa; border-radius: 10px; padding: 12px 10px; margin: 0 -10px;}
-        .dl-num { font-weight: 600; font-size: 18px; width: 25px; }
-        .dl-info { flex: 1; }
-        .dl-info strong { font-size: 16px; font-weight: 600; }
-        .dl-info p { font-size: 12px; color: #54577A; }
-        .dl-check { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #141522; display: flex; align-items: center; justify-content: center; font-size: 12px;}
-        .dl-item.done .dl-info strong { text-decoration: line-through; color: #54577A; }
-        .dl-item.done .dl-check { background: #05cd99; border-color: #05cd99; color: white; }
+        .search-bar {
+            background-color: #F5F5F7;
+            width: 300px;
+            height: 45px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            margin-left: 10px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-left: 30px;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        /* DROPDOWNS */
+        .dropdown {
+            position: absolute;
+            background-color: #FFFFFF;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            display: none;
+            z-index: 100;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .profile-drop {
+            top: 60px;
+            right: 0;
+            width: 200px;
+        }
+
+        .drop-item {
+            padding: 10px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* OVERVIEW CONTENT */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        /* Fix lỗi ảnh biểu đồ */
+        .chart-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-top: 15px;
+        }
+
+        /* DEADLINE LIST */
+        .deadline-list {
+            list-style: none;
+        }
+
+        .dl-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+
+        .dl-check {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dl-item.done strong {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        .dl-item.done .dl-check {
+            background-color: #05cd99;
+            border-color: #05cd99;
+            color: white;
+        }
     </style>
 </head>
 <body>
 
-    <div class="auth-container" id="auth-screen">
-        <div class="auth-box">
-            <div class="auth-form active-form" id="form-signin">
-                <div class="logo" style="margin-bottom: 0;"><i class="fa-solid fa-list-check" style="font-size: 40px;"></i></div>
-                <h2>Sign in</h2>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="example@email.com">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" placeholder="••••••••">
-                </div>
-                <button class="btn-auth" onclick="document.getElementById('auth-screen').style.display='none'">Log in</button>
-            </div>
-        </div>
-    </div>
-
     <div class="app-container">
-        
         <div class="sidebar">
             <div class="logo">
-                <i class="fa-solid fa-list-check"></i><span>Group 8</span>
+                <i class="fa-solid fa-list-check" style="font-size: 24px;"></i>
+                <span style="font-size: 24px; font-weight: 700; margin-left: 10px;">Group 8</span>
             </div>
             <div class="nav-menu">
                 <a href="overview.html" class="nav-item active"><i class="fa-solid fa-border-all"></i> Overview</a>
@@ -156,68 +253,62 @@
             <div class="header">
                 <div class="search-bar">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search...">
+                    <input type="text" placeholder="Search projects...">
                 </div>
-                
                 <div class="header-actions">
                     <div class="noti-btn" id="btn-noti"><i class="fa-regular fa-bell"></i></div>
-                    <div class="dropdown noti-drop" id="drop-noti">
-                        <div class="noti-header"><span>Notifications</span><i class="fa-solid fa-xmark" id="btn-close-noti"></i></div>
-                        <div class="noti-body"><i class="fa-regular fa-circle-question" style="color: #00D1FF;"></i><span>You don't have any notifications</span><i class="fa-regular fa-face-smile"></i></div>
+                    
+                    <div class="user-profile" id="btn-profile">
+                        <span>Hello, User!</span>
+                        <div class="avatar"><i class="fa-regular fa-user"></i></div>
                     </div>
 
-                    <div class="user-profile" id="btn-profile">
-                        <span class="greeting">Hello, User!</span>
-                        <div class="avatar"><i class="fa-regular fa-user"></i></div>
-                        <i class="fa-solid fa-caret-down" style="font-size: 12px;"></i>
-                    </div>
-                    
                     <div class="dropdown profile-drop" id="drop-profile">
-                        <div class="drop-item"><i class="fa-regular fa-user-circle"></i> Profile</div>
-                        <div class="drop-item"><i class="fa-solid fa-gear"></i> Settings</div>
-                        <div class="drop-item" onclick="document.getElementById('auth-screen').style.display='flex'"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</div>
+                        <div class="drop-item">Profile Settings</div>
+                        <div class="drop-item">Account</div>
+                        <hr>
+                        <div class="drop-item">Log out</div>
                     </div>
                 </div>
             </div>
 
             <div class="page-content">
                 <div class="stats-row">
-                    <div class="card stat-card"><div class="stat-title"><i class="fa-solid fa-layer-group"></i> Total Projects</div><div class="stat-num">100</div></div>
-                    <div class="card stat-card"><div class="stat-title"><i class="fa-solid fa-triangle-exclamation"></i> Overdue</div><div class="stat-num">100</div></div>
-                    <div class="card stat-card"><div class="stat-title"><i class="fa-solid fa-check-double"></i> Completed</div><div class="stat-num">100</div></div>
-                    <div class="card stat-card"><div class="stat-title"><i class="fa-solid fa-xmark"></i> Incomplete</div><div class="stat-num">100</div></div>
+                    <div class="stat-card">
+                        <p>Total Projects</p>
+                        <h1 class="stat-num">100</h1>
+                    </div>
+                    <div class="stat-card">
+                        <p>Overdue</p>
+                        <h1 class="stat-num">100</h1>
+                    </div>
+                    <div class="stat-card">
+                        <p>Completed</p>
+                        <h1 class="stat-num">100</h1>
+                    </div>
+                    <div class="stat-card">
+                        <p>Incomplete</p>
+                        <h1 class="stat-num">100</h1>
+                    </div>
                 </div>
 
                 <div class="main-grid">
-                    <div class="grid-left">
-                        <div class="card chart-card">
-                            <h3>Monthly Projects Completed</h3>
-                            <div style="flex: 1; display: flex; justify-content: center; align-items: flex-end; overflow: hidden; margin-top: 10px;">
-                                <img src="chart-image.png" alt="Biểu đồ thống kê" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-                            </div>
-                        </div>
-
-                        <div class="card recent-card">
-                            <h3>Recent Activities</h3>
-                            <div class="activity-tags">
-                                <div class="tag"><div class="tag-icon"><i class="fa-solid fa-pen"></i></div> Activity #1</div>
-                                <div class="tag"><div class="tag-icon"><i class="fa-solid fa-pen"></i></div> Activity #2</div>
-                                <div class="tag"><div class="tag-icon"><i class="fa-solid fa-pen"></i></div> Activity #3</div>
-                            </div>
-                        </div>
+                    <div class="card">
+                        <h3>Monthly Projects Completed</h3>
+                        <img src="chart-image.png" class="chart-img" alt="Chart Statistics">
                     </div>
-                    
-                    <div class="grid-right">
-                        <div class="card deadline-card">
-                            <h3>Upcoming Deadlines</h3>
-                            <div class="deadline-list">
-                                <div class="dl-item" onclick="toggleTask(this)"><div class="dl-num">01</div><div class="dl-info"><strong>Create Wireframe</strong><p>dd/mm/yyyy</p></div><div class="dl-check"><i class="fa-solid fa-check" style="opacity: 0;"></i></div></div>
-                                <div class="dl-item" onclick="toggleTask(this)"><div class="dl-num">02</div><div class="dl-info"><strong>Design System</strong><p>dd/mm/yyyy</p></div><div class="dl-check"><i class="fa-solid fa-check" style="opacity: 0;"></i></div></div>
-                                <div class="dl-item" onclick="toggleTask(this)"><div class="dl-num">03</div><div class="dl-info"><strong>Frontend Dev</strong><p>dd/mm/yyyy</p></div><div class="dl-check"><i class="fa-solid fa-check" style="opacity: 0;"></i></div></div>
-                                <div class="dl-item done" onclick="toggleTask(this)"><div class="dl-num">04</div><div class="dl-info"><strong>Backend Setup</strong><p>dd/mm/yyyy</p></div><div class="dl-check"><i class="fa-solid fa-check"></i></div></div>
-                                <div class="dl-item done" onclick="toggleTask(this)"><div class="dl-num">05</div><div class="dl-info"><strong>Database Init</strong><p>dd/mm/yyyy</p></div><div class="dl-check"><i class="fa-solid fa-check"></i></div></div>
+                    <div class="card">
+                        <h3>Upcoming Deadlines</h3>
+                        <div class="deadline-list">
+                            <div class="dl-item" onclick="v_toggle(this)">
+                                <div><strong>Deadline #1</strong><p>18/04/2026</p></div>
+                                <div class="dl-check"><i class="fa-solid fa-check" style="opacity:0"></i></div>
                             </div>
-                        </div>
+                            <div class="dl-item done" onclick="v_toggle(this)">
+                                <div><strong>Deadline #2</strong><p>15/04/2026</p></div>
+                                <div class="dl-check"><i class="fa-solid fa-check"></i></div>
+                            </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -225,43 +316,4 @@
     </div>
 
     <script>
-        // Xử lý Checkbox Task
-        function toggleTask(element) {
-            element.classList.toggle('done');
-            var icon = element.querySelector('.dl-check i');
-            if(element.classList.contains('done')) { icon.style.opacity = '1'; } 
-            else { icon.style.opacity = '0'; }
-        }
-
-        // Quản lý Dropdown Menu
-        document.onclick = function(event) {
-            var btnNoti = document.getElementById('btn-noti');
-            var btnProfile = document.getElementById('btn-profile');
-            var btnCloseNoti = document.getElementById('btn-close-noti');
-
-            var dropNoti = document.getElementById('drop-noti');
-            var dropProfile = document.getElementById('drop-profile');
-
-            var isClickNotiBtn = btnNoti && btnNoti.contains(event.target);
-            var isClickProfileBtn = btnProfile && btnProfile.contains(event.target);
-            var isClickCloseNoti = btnCloseNoti && btnCloseNoti.contains(event.target);
-
-            // Bảng Profile
-            if (isClickProfileBtn) {
-                dropProfile.style.display = (dropProfile.style.display === 'block') ? 'none' : 'block';
-            } else if (dropProfile && !dropProfile.contains(event.target)) {
-                dropProfile.style.display = 'none';
-            }
-
-            // Bảng Thông Báo
-            if (isClickCloseNoti) {
-                dropNoti.style.display = 'none'; 
-            } else if (isClickNotiBtn) {
-                dropNoti.style.display = (dropNoti.style.display === 'block') ? 'none' : 'block';
-            } else if (dropNoti && !dropNoti.contains(event.target)) {
-                dropNoti.style.display = 'none';
-            }
-        };
-    </script>
-</body>
-</html>
+        // JS
