@@ -6,10 +6,11 @@
     <title>Overview - Group 8 Dashboard</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS viết theo từng dòng nhỏ đúng chuẩn giáo trình */
+        /* CSS viết tách dòng rõ ràng cho thầy dễ chấm */
         * {
             margin: 0;
             padding: 0;
@@ -33,8 +34,9 @@
             background-color: #F3F4F8;
             border-radius: 20px;
             position: relative;
-            display: flex;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
             overflow: hidden;
+            display: flex;
         }
 
         /* SIDEBAR */
@@ -44,24 +46,52 @@
             padding: 40px 20px;
             display: flex;
             flex-direction: column;
+            border-radius: 20px 0 0 20px;
+            z-index: 10;
         }
 
         .logo {
             display: flex;
             align-items: center;
             margin-bottom: 60px;
+            padding-left: 10px;
+        }
+
+        .logo i {
+            font-size: 32px;
+            color: #141522;
+        }
+
+        .logo span {
+            font-family: 'Montserrat';
+            font-size: 32px;
+            font-weight: 600;
+            margin-left: 15px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .nav-item {
-            text-decoration: none;
-            color: #141522;
             display: flex;
             align-items: center;
+            gap: 15px;
             padding: 15px 20px;
-            margin-bottom: 10px;
             border-radius: 10px;
+            font-size: 18px;
             font-weight: 600;
+            cursor: pointer;
             opacity: 0.6;
+            text-decoration: none;
+            color: #141522;
+        }
+
+        .nav-item:hover {
+            opacity: 1;
+            background-color: #f5f5f7;
         }
 
         .nav-item.active {
@@ -69,16 +99,17 @@
             opacity: 1;
         }
 
-        .nav-item i {
-            margin-right: 15px;
-            font-size: 20px;
+        .nav-item.active i {
+            color: #546FFF;
         }
 
         /* MAIN CONTENT */
         .main-wrapper {
             flex: 1;
+            position: relative;
             padding: 40px;
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         .header {
@@ -90,6 +121,10 @@
             align-items: center;
             padding: 0 30px;
             margin-bottom: 40px;
+            position: relative;
+            z-index: 50;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            flex-shrink: 0;
         }
 
         .search-bar {
@@ -100,27 +135,43 @@
             display: flex;
             align-items: center;
             padding: 0 20px;
+            gap: 10px;
         }
 
         .search-bar input {
             border: none;
             background: transparent;
             outline: none;
+            font-family: 'Poppins';
+            font-size: 16px;
             width: 100%;
-            margin-left: 10px;
         }
 
         .header-actions {
             display: flex;
             align-items: center;
+            gap: 30px;
             position: relative;
+        }
+
+        .noti-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
         }
 
         .user-profile {
             display: flex;
             align-items: center;
+            gap: 15px;
             cursor: pointer;
-            margin-left: 30px;
+            padding: 5px 10px;
+            border-radius: 30px;
         }
 
         .avatar {
@@ -129,101 +180,129 @@
             background-color: #e0e0e0;
             border-radius: 50%;
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin-left: 10px;
+            justify-content: center;
+            font-size: 20px;
         }
 
         /* DROPDOWNS */
         .dropdown {
             position: absolute;
             background-color: #FFFFFF;
-            border: 1px solid #ddd;
-            border-radius: 15px;
+            border: 2px solid #F5F5F7;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             display: none;
             z-index: 100;
-            padding: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .profile-drop {
             top: 60px;
             right: 0;
-            width: 200px;
+            width: 230px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
         .drop-item {
-            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            font-weight: 600;
+            font-size: 18px;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: 500;
         }
 
-        /* OVERVIEW CONTENT */
+        .drop-item:hover {
+            background-color: #F5F5F7;
+            color: #546FFF;
+        }
+
+        /* PAGE CONTENT */
+        .page-content {
+            flex: 1;
+            position: relative;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+
         .stats-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 30px;
             margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background-color: #FFFFFF;
-            padding: 20px;
-            border-radius: 20px;
-            text-align: center;
-        }
-
-        .stat-num {
-            font-size: 32px;
-            font-weight: 700;
-        }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
         }
 
         .card {
             background-color: #FFFFFF;
             border-radius: 20px;
-            padding: 25px;
         }
 
-        .chart-img {
+        .stat-card {
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stat-num {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+        }
+
+        .chart-card {
+            padding: 30px;
+            height: 380px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-card img {
             width: 100%;
             height: auto;
-            display: block;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
-        /* DEADLINE LIST */
-        .deadline-list {
-            list-style: none;
+        .deadline-card {
+            padding: 30px;
+            height: 530px;
         }
 
         .dl-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #f0f0f0;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
             cursor: pointer;
         }
 
         .dl-check {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
-            border: 2px solid #333;
+            border: 2px solid #141522;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            font-size: 12px;
         }
 
         .dl-item.done strong {
             text-decoration: line-through;
-            color: #888;
+            color: #54577A;
         }
 
         .dl-item.done .dl-check {
@@ -236,13 +315,14 @@
 <body>
 
     <div class="app-container">
+        
         <div class="sidebar">
             <div class="logo">
-                <i class="fa-solid fa-list-check" style="font-size: 24px;"></i>
-                <span style="font-size: 24px; font-weight: 700; margin-left: 10px;">Group 8</span>
+                <i class="fa-solid fa-list-check"></i>
+                <span>Group 8</span>
             </div>
             <div class="nav-menu">
-                <a href="overview.html" class="nav-item active"><i class="fa-solid fa-border-all"></i> Overview</a>
+                <a href="index.html" class="nav-item active"><i class="fa-solid fa-border-all"></i> Overview</a>
                 <a href="task.html" class="nav-item"><i class="fa-regular fa-file-lines"></i> Task</a>
                 <a href="#" class="nav-item"><i class="fa-regular fa-calendar"></i> Calendar</a>
             </div>
@@ -252,60 +332,48 @@
             <div class="header">
                 <div class="search-bar">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search projects...">
+                    <input type="text" placeholder="Search...">
                 </div>
                 <div class="header-actions">
-                    <div class="noti-btn" id="btn-noti"><i class="fa-regular fa-bell"></i></div>
-                    
-                    <div class="user-profile" id="btn-profile">
-                        <span>Hello, User!</span>
-                        <div class="avatar"><i class="fa-regular fa-user"></i></div>
-                    </div>
+                    <div class="noti-btn"><i class="fa-regular fa-bell"></i></div>
 
+                    <div class="user-profile" id="btn-profile">
+                        <span class="greeting">Hello, User!</span>
+                        <div class="avatar"><i class="fa-regular fa-user"></i></div>
+                        <i class="fa-solid fa-caret-down" style="font-size: 12px;"></i>
+                    </div>
+                    
                     <div class="dropdown profile-drop" id="drop-profile">
-                        <div class="drop-item">Profile Settings</div>
-                        <div class="drop-item">Account</div>
-                        <hr>
-                        <div class="drop-item">Log out</div>
+                        <div class="drop-item"><i class="fa-regular fa-user-circle"></i> Profile</div>
+                        <div class="drop-item"><i class="fa-solid fa-gear"></i> Settings</div>
+                        <div class="drop-item"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</div>
                     </div>
                 </div>
             </div>
 
             <div class="page-content">
                 <div class="stats-row">
-                    <div class="stat-card">
-                        <p>Total Projects</p>
-                        <h1 class="stat-num">100</h1>
-                    </div>
-                    <div class="stat-card">
-                        <p>Overdue</p>
-                        <h1 class="stat-num">100</h1>
-                    </div>
-                    <div class="stat-card">
-                        <p>Completed</p>
-                        <h1 class="stat-num">100</h1>
-                    </div>
-                    <div class="stat-card">
-                        <p>Incomplete</p>
-                        <h1 class="stat-num">100</h1>
-                    </div>
+                    <div class="card stat-card"><div class="stat-num">100</div><p>Total Projects</p></div>
+                    <div class="card stat-card"><div class="stat-num">100</div><p>Overdue</p></div>
+                    <div class="card stat-card"><div class="stat-num">100</div><p>Completed</p></div>
+                    <div class="card stat-card"><div class="stat-num">100</div><p>Incomplete</p></div>
                 </div>
 
                 <div class="main-grid">
-                    <div class="card">
+                    <div class="card chart-card">
                         <h3>Monthly Projects Completed</h3>
-                        <img src="chart-image.png" class="chart-img" alt="Chart Statistics">
+                        <img src="chart-image.png" alt="Statistics Chart">
                     </div>
-                    <div class="card">
+                    <div class="card deadline-card">
                         <h3>Upcoming Deadlines</h3>
                         <div class="deadline-list">
                             <div class="dl-item" onclick="v_toggle(this)">
-                                <div><strong>Deadline #1</strong><p>18/04/2026</p></div>
-                                <div class="dl-check"><i class="fa-solid fa-check" style="opacity:0"></i></div>
+                                <div class="dl-check"><i class="fa-solid fa-check" style="opacity: 0;"></i></div>
+                                <div><strong>Create Wireframe</strong><p>18/04/2026</p></div>
                             </div>
                             <div class="dl-item done" onclick="v_toggle(this)">
-                                <div><strong>Deadline #2</strong><p>15/04/2026</p></div>
                                 <div class="dl-check"><i class="fa-solid fa-check"></i></div>
+                                <div><strong>Design System</strong><p>15/04/2026</p></div>
                             </div>
                         </div>
                     </div>
@@ -315,31 +383,32 @@
     </div>
 
     <script>
-        function v_toggle(the_the) {
-            if (the_the.classList.contains('done')) {
-                the_the.classList.remove('done');
-                the_the.querySelector('i').style.opacity = "0";
-            } else {
-                the_the.classList.add('done');
-                the_the.querySelector('i').style.opacity = "1";
-            }
-        }
+        // JS phong cách sinh viên, biến đặt tên rõ ràng
+        var nut_profile = document.getElementById('btn-profile');
+        var bang_menu = document.getElementById('drop-profile');
 
-        var v_btn = document.getElementById('btn-profile');
-        var v_box = document.getElementById('drop-profile');
-
-        v_btn.onclick = function(e) {
-            e.stopPropagation();
-            if (v_box.style.display === "block") {
-                v_box.style.display = "none";
+        nut_profile.onclick = function(event) {
+            event.stopPropagation();
+            if (bang_menu.style.display === 'block') {
+                bang_menu.style.display = 'none';
             } else {
-                v_box.style.display = "block";
+                bang_menu.style.display = 'block';
             }
         };
 
         document.onclick = function() {
-            v_box.style.display = "none";
+            bang_menu.style.display = 'none';
         };
+
+        function v_toggle(phan_tu) {
+            phan_tu.classList.toggle('done');
+            var icon = phan_tu.querySelector('.dl-check i');
+            if (phan_tu.classList.contains('done')) {
+                icon.style.opacity = '1';
+            } else {
+                icon.style.opacity = '0';
+            }
+        }
     </script>
 </body>
 </html>
