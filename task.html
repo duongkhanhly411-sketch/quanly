@@ -5,98 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks - Group 8 Dashboard</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ================= RESET CHUNG ================= */
+        /* CSS viết rời từng dòng */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background-color: #e5e5e5; font-family: 'Poppins', sans-serif;
-            color: #141522; height: 100vh; display: flex;
-            justify-content: center; align-items: center; overflow: hidden;
+            background-color: #e5e5e5;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        ::-webkit-scrollbar { display: none; }
 
-        /* Bố cục chính */
         .app-container {
-            width: 1440px; height: 944px; background: #F3F4F8;
-            border-radius: 20px; position: relative;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.15); overflow: hidden; display: flex;
+            width: 1440px;
+            height: 944px;
+            background-color: #F3F4F8;
+            border-radius: 20px;
+            display: flex;
+            overflow: hidden;
         }
 
-        /* ================= SIDEBAR ================= */
-        .sidebar { width: 250px; background: #FFFFFF; padding: 40px 20px; display: flex; flex-direction: column; border-radius: 20px 0 0 20px; z-index: 10;}
-        .logo { display: flex; align-items: center; gap: 15px; margin-bottom: 60px; padding-left: 10px; }
-        .logo i { font-size: 32px; color: #141522; }
-        .logo span { font-family: 'Montserrat'; font-size: 32px; font-weight: 600; }
-        .nav-menu { display: flex; flex-direction: column; gap: 15px; }
-        
-        /* Chuyển menu thành thẻ a chuẩn sinh viên */
-        .nav-item { 
-            text-decoration: none; color: #141522; display: flex; align-items: center; gap: 15px; 
-            padding: 15px 20px; border-radius: 10px; font-size: 18px; font-weight: 600; opacity: 0.6; 
+        /* Sidebar Copy từ trang Overview */
+        .sidebar {
+            width: 250px;
+            background-color: #FFFFFF;
+            padding: 40px 20px;
         }
-        .nav-item:hover { opacity: 1; background: #f5f5f7; } 
-        .nav-item.active { background: #F5F5F7; opacity: 1; }
-        .nav-item.active i { color: #546FFF; }
 
-        /* ================= HEADER ================= */
-        .main-wrapper { flex: 1; position: relative; padding: 40px; display: flex; flex-direction: column;}
-        .header { height: 80px; background: #FFFFFF; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; margin-bottom: 40px; position: relative; z-index: 50; box-shadow: 0 2px 10px rgba(0,0,0,0.02); flex-shrink: 0;}
-        .search-bar { background: #F5F5F7; width: 300px; height: 45px; border-radius: 30px; display: flex; align-items: center; padding: 0 20px; gap: 10px; }
-        .search-bar input { border: none; background: transparent; outline: none; font-family: 'Poppins'; font-size: 16px; width: 100%;}
-        .header-actions { display: flex; align-items: center; gap: 30px; position: relative;}
-        
-        .noti-btn { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 24px;}
-        .noti-btn:hover { background: #F5F5F7; }
-        .user-profile { display: flex; align-items: center; gap: 15px; cursor: pointer; padding: 5px 10px; border-radius: 30px;}
-        .user-profile:hover { background: #F5F5F7; }
-        .avatar { width: 45px; height: 45px; background: #e0e0e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .nav-item {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            opacity: 0.6;
+        }
 
-        /* Dropdown Ẩn */
-        .dropdown { position: absolute; background: #FFFFFF; border: 2px solid #F5F5F7; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: none; z-index: 100; }
-        .dropdown.show { display: block; }
-        .noti-drop { top: 60px; right: 200px; width: 280px; padding: 15px; }
-        .noti-header { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 15px; }
-        .noti-header i { cursor: pointer; }
-        .noti-header i:hover { color: red; } 
-        .noti-body { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500;}
-        .profile-drop { top: 60px; right: 0; width: 230px; padding: 10px; display: flex; flex-direction: column; gap: 5px;}
-        .drop-item { display: flex; align-items: center; gap: 15px; padding: 12px 15px; font-weight: 600; font-size: 18px; border-radius: 10px; cursor: pointer; }
-        .drop-item:hover { background: #F5F5F7; color: #546FFF; }
+        .nav-item.active {
+            background-color: #F5F5F7;
+            opacity: 1;
+        }
 
-        /* ================= NỘI DUNG TASK ================= */
-        .page-content { flex: 1; overflow-y: auto; padding-bottom: 20px;}
-        
-        .task-section { background: #FFFFFF; border-radius: 20px; padding: 30px; margin-bottom: 30px;}
-        .ts-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .ts-header h2 { font-size: 24px; font-weight: 700; }
-        .ts-actions { display: flex; align-items: center; gap: 20px; }
-        .btn-primary { background: #546FFF; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-weight: 500; font-size: 14px; cursor: pointer; }
-        .btn-primary:hover { background: #425adb; }
-        
-        .task-list { display: flex; gap: 30px; overflow-x: auto; padding: 10px 0 20px 0; }
-        .t-card { min-width: 300px; height: 280px; background: rgba(243, 244, 248, 0.5); border-radius: 20px; padding: 15px; border: 2px solid transparent; cursor: pointer;}
-        .t-card:hover { background: white; border-color: #BAC8FF;}
-        .t-img { width: 100%; height: 110px; border-radius: 10px; object-fit: cover; margin-bottom: 15px; }
-        .t-title { font-weight: 600; font-size: 16px; margin-bottom: 2px; }
-        .t-sub { font-weight: 500; font-size: 12px; color: #54577A; margin-bottom: 20px; }
-        
-        .prog-info { display: flex; justify-content: space-between; font-weight: 500; font-size: 14px; margin-bottom: 8px; }
-        .prog-track { width: 100%; height: 8px; background: #BAC8FF; border-radius: 8px; position: relative; }
-        .prog-fill { height: 100%; background: #546FFF; border-radius: 8px;}
-        .prog-thumb { width: 16px; height: 16px; background: #546FFF; border: 2px solid white; border-radius: 50%; position: absolute; top: -4px;}
-        .t-footer { margin-top: 15px; font-weight: 500; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+        .nav-item i { margin-right: 15px; }
+
+        /* Task Content */
+        .main-wrapper {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .task-card {
+            background-color: #FFFFFF;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .task-img {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #546FFF;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        
         <div class="sidebar">
-            <div class="logo">
-                <i class="fa-solid fa-list-check"></i><span>Group 8</span>
+            <div class="logo" style="margin-bottom: 50px;">
+                <i class="fa-solid fa-list-check"></i> <strong>Group 8</strong>
             </div>
             <div class="nav-menu">
                 <a href="overview.html" class="nav-item"><i class="fa-solid fa-border-all"></i> Overview</a>
@@ -106,123 +114,20 @@
         </div>
 
         <div class="main-wrapper">
-            <div class="header">
-                <div class="search-bar">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search...">
+            <h2>Personal Projects</h2>
+            <div class="task-grid">
+                <div class="task-card">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400" class="task-img">
+                    <h4>Web Design UI</h4>
+                    <p style="font-size: 12px; color: #888;">Deadline: 2 days left</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%;"></div>
+                    </div>
+                    <p style="font-size: 12px; text-align: right;">80%</p>
                 </div>
-                
-                <div class="header-actions">
-                    <div class="noti-btn" id="btn-noti"><i class="fa-regular fa-bell"></i></div>
-                    <div class="dropdown noti-drop" id="drop-noti">
-                        <div class="noti-header"><span>Notifications</span><i class="fa-solid fa-xmark" id="btn-close-noti"></i></div>
-                        <div class="noti-body"><i class="fa-regular fa-circle-question" style="color: #00D1FF;"></i><span>You don't have any notifications</span><i class="fa-regular fa-face-smile"></i></div>
-                    </div>
-
-                    <div class="user-profile" id="btn-profile">
-                        <span class="greeting">Hello, User!</span>
-                        <div class="avatar"><i class="fa-regular fa-user"></i></div>
-                        <i class="fa-solid fa-caret-down" style="font-size: 12px;"></i>
-                    </div>
-                    
-                    <div class="dropdown profile-drop" id="drop-profile">
-                        <div class="drop-item"><i class="fa-regular fa-user-circle"></i> Profile</div>
-                        <div class="drop-item"><i class="fa-solid fa-gear"></i> Settings</div>
-                        <div class="drop-item" onclick="window.location.href='overview.html'"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</div>
-                    </div>
                 </div>
-            </div>
-
-            <div class="page-content">
-                <div class="task-section">
-                    <div class="ts-header">
-                        <h2>Personal Projects</h2>
-                        <div class="ts-actions">
-                            <div style="font-size: 14px; font-weight: 500; margin-right: 10px;">
-                                <i class="fa-solid fa-arrow-down-short-wide"></i> Sort By : Deadline
-                            </div>
-                            <button class="btn-primary"><i class="fa-solid fa-plus"></i> New Task</button>
-                        </div>
-                    </div>
-                    <div class="task-list">
-                        <div class="t-card">
-                            <img class="t-img" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=300&q=80" alt="Code">
-                            <div class="t-title">Creating Web UI</div><div class="t-sub">Your job as a UX Des</div>
-                            <div class="prog-info"><span>Progress</span><span class="prog-val">85%</span></div>
-                            <div class="prog-track"><div class="prog-fill" style="width:85%;"></div><div class="prog-thumb" style="left:calc(85% - 8px);"></div></div>
-                            <div class="t-footer"><i class="fa-regular fa-clock"></i> 4 Hours Left</div>
-                        </div>
-                        <div class="t-card">
-                            <img class="t-img" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=300&q=80" alt="Code">
-                            <div class="t-title">Fixing Bugs</div><div class="t-sub">Frontend team</div>
-                            <div class="prog-info"><span>Progress</span><span class="prog-val">40%</span></div>
-                            <div class="prog-track"><div class="prog-fill" style="width: 40%;"></div><div class="prog-thumb" style="left: calc(40% - 8px);"></div></div>
-                            <div class="t-footer"><i class="fa-regular fa-clock"></i> 2 Days Left</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="task-section" style="margin-bottom: 50px;">
-                    <div class="ts-header">
-                        <h2>Team Projects</h2>
-                        <div class="ts-actions">
-                            <div style="font-size: 14px; font-weight: 500; margin-right: 10px;">
-                                <i class="fa-solid fa-arrow-down-short-wide"></i> Sort By : Deadline
-                            </div>
-                            <button class="btn-primary"><i class="fa-solid fa-plus"></i> New Project</button>
-                        </div>
-                    </div>
-                    <div class="task-list">
-                        <div class="t-card">
-                            <img class="t-img" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=300&q=80" alt="Code">
-                            <div class="t-title">Creating Perfect Website</div><div class="t-sub">Web Developer</div>
-                            <div class="prog-info"><span>Progress</span><span class="prog-val">85%</span></div>
-                            <div class="prog-track"><div class="prog-fill" style="width:85%;"></div><div class="prog-thumb" style="left:calc(85% - 8px);"></div></div>
-                            <div class="t-footer"><i class="fa-regular fa-clock"></i> 4 Days Left</div>
-                        </div>
-                        <div class="t-card">
-                            <img class="t-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=300&q=80" alt="Code">
-                            <div class="t-title">Backend API Setup</div><div class="t-sub">Backend Developer</div>
-                            <div class="prog-info"><span>Progress</span><span class="prog-val">60%</span></div>
-                            <div class="prog-track"><div class="prog-fill" style="width:60%;"></div><div class="prog-thumb" style="left:calc(60% - 8px);"></div></div>
-                            <div class="t-footer"><i class="fa-regular fa-clock"></i> 6 Days Left</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
-    <script>
-        // Quản lý Dropdown Menu (Chỉ giữ lại của Header)
-        document.onclick = function(event) {
-            var btnNoti = document.getElementById('btn-noti');
-            var btnProfile = document.getElementById('btn-profile');
-            var btnCloseNoti = document.getElementById('btn-close-noti');
-
-            var dropNoti = document.getElementById('drop-noti');
-            var dropProfile = document.getElementById('drop-profile');
-
-            var isClickNotiBtn = btnNoti && btnNoti.contains(event.target);
-            var isClickProfileBtn = btnProfile && btnProfile.contains(event.target);
-            var isClickCloseNoti = btnCloseNoti && btnCloseNoti.contains(event.target);
-
-            // Bảng Profile
-            if (isClickProfileBtn) {
-                dropProfile.style.display = (dropProfile.style.display === 'block') ? 'none' : 'block';
-            } else if (dropProfile && !dropProfile.contains(event.target)) {
-                dropProfile.style.display = 'none';
-            }
-
-            // Bảng Thông báo
-            if (isClickCloseNoti) {
-                dropNoti.style.display = 'none'; 
-            } else if (isClickNotiBtn) {
-                dropNoti.style.display = (dropNoti.style.display === 'block') ? 'none' : 'block';
-            } else if (dropNoti && !dropNoti.contains(event.target)) {
-                dropNoti.style.display = 'none';
-            }
-        };
-    </script>
 </body>
 </html>
