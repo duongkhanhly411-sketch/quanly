@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS viết tách dòng rõ ràng cho thầy dễ chấm */
+        /* CSS tách từng dòng nhỏ cho giống sinh viên làm bài */
         * {
             margin: 0;
             padding: 0;
@@ -28,6 +28,10 @@
             overflow: hidden;
         }
 
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
         .app-container {
             width: 1440px;
             height: 944px;
@@ -39,7 +43,7 @@
             display: flex;
         }
 
-        /* SIDEBAR */
+        /* ================= SIDEBAR ================= */
         .sidebar {
             width: 250px;
             background-color: #FFFFFF;
@@ -83,10 +87,9 @@
             border-radius: 10px;
             font-size: 18px;
             font-weight: 600;
-            cursor: pointer;
-            opacity: 0.6;
             text-decoration: none;
             color: #141522;
+            opacity: 0.6;
         }
 
         .nav-item:hover {
@@ -103,7 +106,7 @@
             color: #546FFF;
         }
 
-        /* MAIN CONTENT */
+        /* ================= MAIN CONTENT WRAPPER ================= */
         .main-wrapper {
             flex: 1;
             position: relative;
@@ -112,6 +115,7 @@
             flex-direction: column;
         }
 
+        /* HEADER */
         .header {
             height: 80px;
             background-color: #FFFFFF;
@@ -135,7 +139,6 @@
             display: flex;
             align-items: center;
             padding: 0 20px;
-            gap: 10px;
         }
 
         .search-bar input {
@@ -196,6 +199,13 @@
             z-index: 100;
         }
 
+        .noti-drop {
+            top: 60px;
+            right: 200px;
+            width: 280px;
+            padding: 15px;
+        }
+
         .profile-drop {
             top: 60px;
             right: 0;
@@ -222,7 +232,7 @@
             color: #546FFF;
         }
 
-        /* PAGE CONTENT */
+        /* ================= OVERVIEW PAGE CONTENT ================= */
         .page-content {
             flex: 1;
             position: relative;
@@ -230,16 +240,17 @@
             padding-bottom: 20px;
         }
 
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 20px;
+        }
+
+        /* Stats Row */
         .stats-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
             margin-bottom: 30px;
-        }
-
-        .card {
-            background-color: #FFFFFF;
-            border-radius: 20px;
         }
 
         .stat-card {
@@ -256,12 +267,14 @@
             font-weight: 700;
         }
 
+        /* Main Grid */
         .main-grid {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
             gap: 30px;
         }
 
+        /* Left Side: Chart & Recent */
         .chart-card {
             padding: 30px;
             height: 380px;
@@ -275,9 +288,62 @@
             margin-top: 20px;
         }
 
+        .recent-card {
+            margin-top: 30px;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            height: 120px;
+        }
+
+        .recent-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .activity-tags {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+        }
+
+        .tag {
+            background-color: #F7F7F7;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .tag-icon {
+            width: 28px;
+            height: 28px;
+            background-color: #7784EE;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* Right Side: Deadlines */
         .deadline-card {
             padding: 30px;
             height: 530px;
+        }
+
+        .deadline-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         .dl-item {
@@ -287,6 +353,16 @@
             padding: 12px 0;
             border-bottom: 1px solid rgba(0,0,0,0.05);
             cursor: pointer;
+        }
+
+        .dl-num {
+            font-weight: 600;
+            font-size: 18px;
+            width: 25px;
+        }
+
+        .dl-info {
+            flex: 1;
         }
 
         .dl-check {
@@ -300,6 +376,7 @@
             font-size: 12px;
         }
 
+        /* Trạng thái hoàn thành */
         .dl-item.done strong {
             text-decoration: line-through;
             color: #54577A;
@@ -322,9 +399,15 @@
                 <span>Group 8</span>
             </div>
             <div class="nav-menu">
-                <a href="index.html" class="nav-item active"><i class="fa-solid fa-border-all"></i> Overview</a>
-                <a href="task.html" class="nav-item"><i class="fa-regular fa-file-lines"></i> Task</a>
-                <a href="#" class="nav-item"><i class="fa-regular fa-calendar"></i> Calendar</a>
+                <a href="index.html" class="nav-item active">
+                    <i class="fa-solid fa-border-all"></i> Overview
+                </a>
+                <a href="task.html" class="nav-item">
+                    <i class="fa-regular fa-file-lines"></i> Task
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-regular fa-calendar"></i> Calendar
+                </a>
             </div>
         </div>
 
@@ -334,8 +417,15 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" placeholder="Search...">
                 </div>
+                
                 <div class="header-actions">
-                    <div class="noti-btn"><i class="fa-regular fa-bell"></i></div>
+                    <div class="noti-btn" id="btn-noti">
+                        <i class="fa-regular fa-bell"></i>
+                    </div>
+                    <div class="dropdown noti-drop" id="drop-noti">
+                        <div style="font-weight: 700; margin-bottom: 10px;">Notifications</div>
+                        <div style="font-size: 14px;">You have no new messages.</div>
+                    </div>
 
                     <div class="user-profile" id="btn-profile">
                         <span class="greeting">Hello, User!</span>
@@ -346,60 +436,135 @@
                     <div class="dropdown profile-drop" id="drop-profile">
                         <div class="drop-item"><i class="fa-regular fa-user-circle"></i> Profile</div>
                         <div class="drop-item"><i class="fa-solid fa-gear"></i> Settings</div>
-                        <div class="drop-item"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</div>
+                        <div class="drop-item" onclick="window.location.href='index.html'">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Log out
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="page-content">
+                
                 <div class="stats-row">
-                    <div class="card stat-card"><div class="stat-num">100</div><p>Total Projects</p></div>
-                    <div class="card stat-card"><div class="stat-num">100</div><p>Overdue</p></div>
-                    <div class="card stat-card"><div class="stat-num">100</div><p>Completed</p></div>
-                    <div class="card stat-card"><div class="stat-num">100</div><p>Incomplete</p></div>
+                    <div class="card stat-card">
+                        <div class="stat-num">100</div>
+                        <p>Total Projects</p>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-num">100</div>
+                        <p>Overdue</p>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-num">100</div>
+                        <p>Completed</p>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-num">100</div>
+                        <p>Incomplete</p>
+                    </div>
                 </div>
 
                 <div class="main-grid">
-                    <div class="card chart-card">
-                        <h3>Monthly Projects Completed</h3>
-                        <img src="chart-image.png" alt="Statistics Chart">
-                    </div>
-                    <div class="card deadline-card">
-                        <h3>Upcoming Deadlines</h3>
-                        <div class="deadline-list">
-                            <div class="dl-item" onclick="v_toggle(this)">
-                                <div class="dl-check"><i class="fa-solid fa-check" style="opacity: 0;"></i></div>
-                                <div><strong>Create Wireframe</strong><p>18/04/2026</p></div>
-                            </div>
-                            <div class="dl-item done" onclick="v_toggle(this)">
-                                <div class="dl-check"><i class="fa-solid fa-check"></i></div>
-                                <div><strong>Design System</strong><p>15/04/2026</p></div>
+                    
+                    <div class="grid-left">
+                        <div class="card chart-card">
+                            <h3>Monthly Projects Completed</h3>
+                            <img src="chart-image.png" alt="Statistics Chart">
+                        </div>
+
+                        <div class="card recent-card">
+                            <h3>Recent Activities</h3>
+                            <div class="activity-tags">
+                                <div class="tag">
+                                    <div class="tag-icon"><i class="fa-solid fa-pen"></i></div> 
+                                    Activity #1
+                                </div>
+                                <div class="tag">
+                                    <div class="tag-icon"><i class="fa-solid fa-pen"></i></div> 
+                                    Activity #2
+                                </div>
+                                <div class="tag">
+                                    <div class="tag-icon"><i class="fa-solid fa-pen"></i></div> 
+                                    Activity #3
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="grid-right">
+                        <div class="card deadline-card">
+                            <h3>Upcoming Deadlines</h3>
+                            <div class="deadline-list">
+                                <div class="dl-item" onclick="v_toggle(this)">
+                                    <div class="dl-num">01</div>
+                                    <div class="dl-info"><strong>Create Wireframe</strong><p>dd/mm/yyyy</p></div>
+                                    <div class="dl-check"><i class="fa-solid fa-check" style="opacity: 0;"></i></div>
+                                </div>
+                                <div class="dl-item" onclick="v_toggle(this)">
+                                    <div class="dl-num">02</div>
+                                    <div class="dl-info"><strong>Design System</strong><p>dd/mm/yyyy</p></div>
+                                    <div class="dl-check"><i class="fa-solid fa-check" style="opacity: 0;"></i></div>
+                                </div>
+                                <div class="dl-item" onclick="v_toggle(this)">
+                                    <div class="dl-num">03</div>
+                                    <div class="dl-info"><strong>Frontend Dev</strong><p>dd/mm/yyyy</p></div>
+                                    <div class="dl-check"><i class="fa-solid fa-check" style="opacity: 0;"></i></div>
+                                </div>
+                                <div class="dl-item done" onclick="v_toggle(this)">
+                                    <div class="dl-num">04</div>
+                                    <div class="dl-info"><strong>Backend Setup</strong><p>dd/mm/yyyy</p></div>
+                                    <div class="dl-check"><i class="fa-solid fa-check"></i></div>
+                                </div>
+                                <div class="dl-item done" onclick="v_toggle(this)">
+                                    <div class="dl-num">05</div>
+                                    <div class="dl-info"><strong>Database Init</strong><p>dd/mm/yyyy</p></div>
+                                    <div class="dl-check"><i class="fa-solid fa-check"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // JS phong cách sinh viên, biến đặt tên rõ ràng
+        // JS phong cách sinh viên, khai báo biến bằng var
         var nut_profile = document.getElementById('btn-profile');
-        var bang_menu = document.getElementById('drop-profile');
+        var bang_profile = document.getElementById('drop-profile');
+        var nut_noti = document.getElementById('btn-noti');
+        var bang_noti = document.getElementById('drop-noti');
 
+        // Bật tắt menu Profile
         nut_profile.onclick = function(event) {
             event.stopPropagation();
-            if (bang_menu.style.display === 'block') {
-                bang_menu.style.display = 'none';
+            if (bang_profile.style.display === 'block') {
+                bang_profile.style.display = 'none';
             } else {
-                bang_menu.style.display = 'block';
+                bang_profile.style.display = 'block';
+                bang_noti.style.display = 'none';
             }
         };
 
-        document.onclick = function() {
-            bang_menu.style.display = 'none';
+        // Bật tắt menu Thông báo
+        nut_noti.onclick = function(event) {
+            event.stopPropagation();
+            if (bang_noti.style.display === 'block') {
+                bang_noti.style.display = 'none';
+            } else {
+                bang_noti.style.display = 'block';
+                bang_profile.style.display = 'none';
+            }
         };
 
+        // Click ra ngoài thì tắt hết menu
+        document.onclick = function() {
+            bang_profile.style.display = 'none';
+            bang_noti.style.display = 'none';
+        };
+
+        // Hàm click hoàn thành Deadline
         function v_toggle(phan_tu) {
             phan_tu.classList.toggle('done');
             var icon = phan_tu.querySelector('.dl-check i');
