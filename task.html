@@ -9,15 +9,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS viết rời từng dòng */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background-color: #e5e5e5;
             font-family: 'Poppins', sans-serif;
+            color: #141522;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            overflow: hidden;
         }
 
         .app-container {
@@ -26,25 +32,34 @@
             background-color: #F3F4F8;
             border-radius: 20px;
             display: flex;
-            overflow: hidden;
         }
 
-        /* Sidebar Copy từ trang Overview */
+        /* SIDEBAR */
         .sidebar {
             width: 250px;
             background-color: #FFFFFF;
             padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px 0 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
         }
 
         .nav-item {
-            text-decoration: none;
-            color: #333;
             display: flex;
             align-items: center;
+            gap: 15px;
             padding: 15px 20px;
-            margin-bottom: 10px;
             border-radius: 10px;
+            font-size: 18px;
             font-weight: 600;
+            text-decoration: none;
+            color: #141522;
             opacity: 0.6;
         }
 
@@ -53,9 +68,7 @@
             opacity: 1;
         }
 
-        .nav-item i { margin-right: 15px; }
-
-        /* Task Content */
+        /* MAIN CONTENT */
         .main-wrapper {
             flex: 1;
             padding: 40px;
@@ -64,38 +77,37 @@
 
         .task-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
             margin-top: 20px;
         }
 
-        .task-card {
+        .t-card {
             background-color: #FFFFFF;
             border-radius: 20px;
             padding: 20px;
         }
 
-        .task-img {
+        .t-img {
             width: 100%;
-            height: 150px;
+            height: 180px;
             border-radius: 10px;
             object-fit: cover;
             margin-bottom: 15px;
         }
 
-        .progress-bar {
+        .prog-track {
             width: 100%;
             height: 10px;
             background-color: #eee;
-            border-radius: 5px;
+            border-radius: 10px;
             margin: 10px 0;
-            position: relative;
         }
 
-        .progress-fill {
+        .prog-fill {
             height: 100%;
             background-color: #546FFF;
-            border-radius: 5px;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -103,29 +115,35 @@
 
     <div class="app-container">
         <div class="sidebar">
-            <div class="logo" style="margin-bottom: 50px;">
-                <i class="fa-solid fa-list-check"></i> <strong>Group 8</strong>
+            <div class="logo">
+                <i class="fa-solid fa-list-check" style="font-size: 32px;"></i>
+                <strong style="font-size: 32px; margin-left: 15px;">Group 8</strong>
             </div>
             <div class="nav-menu">
-                <a href="overview.html" class="nav-item"><i class="fa-solid fa-border-all"></i> Overview</a>
+                <a href="index.html" class="nav-item"><i class="fa-solid fa-border-all"></i> Overview</a>
                 <a href="task.html" class="nav-item active"><i class="fa-regular fa-file-lines"></i> Task</a>
                 <a href="#" class="nav-item"><i class="fa-regular fa-calendar"></i> Calendar</a>
             </div>
         </div>
 
         <div class="main-wrapper">
-            <h2>Personal Projects</h2>
+            <h2>Your Current Projects</h2>
             <div class="task-grid">
-                <div class="task-card">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400" class="task-img">
-                    <h4>Web Design UI</h4>
-                    <p style="font-size: 12px; color: #888;">Deadline: 2 days left</p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 80%;"></div>
-                    </div>
-                    <p style="font-size: 12px; text-align: right;">80%</p>
+                <div class="t-card">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400" class="t-img">
+                    <h4>Web UI Design</h4>
+                    <p>UX Designer</p>
+                    <div class="prog-track"><div class="prog-fill" style="width: 85%;"></div></div>
+                    <p>85% Completed</p>
                 </div>
+                <div class="t-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400" class="t-img">
+                    <h4>Bug Fixing</h4>
+                    <p>Developer</p>
+                    <div class="prog-track"><div class="prog-fill" style="width: 40%;"></div></div>
+                    <p>40% Completed</p>
                 </div>
+            </div>
         </div>
     </div>
 
