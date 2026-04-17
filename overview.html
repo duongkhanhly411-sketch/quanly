@@ -190,7 +190,6 @@
             padding: 25px;
         }
 
-        /* Fix lỗi ảnh biểu đồ */
         .chart-img {
             width: 100%;
             height: auto;
@@ -308,7 +307,7 @@
                                 <div><strong>Deadline #2</strong><p>15/04/2026</p></div>
                                 <div class="dl-check"><i class="fa-solid fa-check"></i></div>
                             </div>
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -316,4 +315,31 @@
     </div>
 
     <script>
-        // JS
+        function v_toggle(the_the) {
+            if (the_the.classList.contains('done')) {
+                the_the.classList.remove('done');
+                the_the.querySelector('i').style.opacity = "0";
+            } else {
+                the_the.classList.add('done');
+                the_the.querySelector('i').style.opacity = "1";
+            }
+        }
+
+        var v_btn = document.getElementById('btn-profile');
+        var v_box = document.getElementById('drop-profile');
+
+        v_btn.onclick = function(e) {
+            e.stopPropagation();
+            if (v_box.style.display === "block") {
+                v_box.style.display = "none";
+            } else {
+                v_box.style.display = "block";
+            }
+        };
+
+        document.onclick = function() {
+            v_box.style.display = "none";
+        };
+    </script>
+</body>
+</html>
