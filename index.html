@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS tách từng dòng nhỏ cho giống sinh viên làm bài */
         * {
             margin: 0;
             padding: 0;
@@ -43,7 +42,6 @@
             display: flex;
         }
 
-        /* ================= SIDEBAR ================= */
         .sidebar {
             width: 250px;
             background-color: #FFFFFF;
@@ -106,7 +104,6 @@
             color: #546FFF;
         }
 
-        /* ================= MAIN CONTENT WRAPPER ================= */
         .main-wrapper {
             flex: 1;
             position: relative;
@@ -115,7 +112,6 @@
             flex-direction: column;
         }
 
-        /* HEADER */
         .header {
             height: 80px;
             background-color: #FFFFFF;
@@ -188,7 +184,6 @@
             font-size: 20px;
         }
 
-        /* DROPDOWNS */
         .dropdown {
             position: absolute;
             background-color: #FFFFFF;
@@ -232,7 +227,6 @@
             color: #546FFF;
         }
 
-        /* ================= OVERVIEW PAGE CONTENT ================= */
         .page-content {
             flex: 1;
             position: relative;
@@ -245,7 +239,6 @@
             border-radius: 20px;
         }
 
-        /* Stats Row */
         .stats-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -267,14 +260,12 @@
             font-weight: 700;
         }
 
-        /* Main Grid */
         .main-grid {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
             gap: 30px;
         }
 
-        /* Left Side: Chart & Recent */
         .chart-card {
             padding: 30px;
             height: 380px;
@@ -333,7 +324,6 @@
             font-size: 12px;
         }
 
-        /* Right Side: Deadlines */
         .deadline-card {
             padding: 30px;
             height: 530px;
@@ -376,7 +366,6 @@
             font-size: 12px;
         }
 
-        /* Trạng thái hoàn thành */
         .dl-item.done strong {
             text-decoration: line-through;
             color: #54577A;
@@ -530,13 +519,11 @@
     </div>
 
     <script>
-        // JS phong cách sinh viên, khai báo biến bằng var
         var nut_profile = document.getElementById('btn-profile');
         var bang_profile = document.getElementById('drop-profile');
         var nut_noti = document.getElementById('btn-noti');
         var bang_noti = document.getElementById('drop-noti');
 
-        // Bật tắt menu Profile
         nut_profile.onclick = function(event) {
             event.stopPropagation();
             if (bang_profile.style.display === 'block') {
@@ -547,7 +534,6 @@
             }
         };
 
-        // Bật tắt menu Thông báo
         nut_noti.onclick = function(event) {
             event.stopPropagation();
             if (bang_noti.style.display === 'block') {
@@ -558,13 +544,11 @@
             }
         };
 
-        // Click ra ngoài thì tắt hết menu
         document.onclick = function() {
             bang_profile.style.display = 'none';
             bang_noti.style.display = 'none';
         };
 
-        // Hàm click hoàn thành Deadline
         function v_toggle(phan_tu) {
             phan_tu.classList.toggle('done');
             var icon = phan_tu.querySelector('.dl-check i');
