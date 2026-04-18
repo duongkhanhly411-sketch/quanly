@@ -32,10 +32,8 @@
         }
 
         .app-container {
-            width: 96vw;           
-            max-width: 1440px;     
-            height: 92vh;        
-            max-height: 944px;
+            width: 1440px; 
+            height: 944px;
             background-color: #F3F4F8;
             border-radius: 20px;
             position: relative;
@@ -43,17 +41,14 @@
             display: flex; 
             overflow: hidden;
         }
-
-       
         .sidebar {
             width: 250px; 
             background-color: #FFFFFF; 
-            padding: 30px 20px;   
+            padding: 40px 20px;
             display: flex; 
             flex-direction: column; 
             border-radius: 20px 0 0 20px; 
             z-index: 10;
-            overflow-y: auto;     
         }
 
         .logo { 
@@ -591,7 +586,7 @@
                 
                 <div class="header-actions">
                     <div class="noti-btn" id="btn-noti"><i class="fa-regular fa-bell"></i></div>
-                    <div class="dropdown noti-drop" id="drop-noti" style="display: none;">
+                    <div class="dropdown noti-drop" id="drop-noti">
                         <div style="font-weight: 700; margin-bottom: 10px;">Thông báo</div>
                         <div style="font-size: 14px;">Bạn không có thông báo nào.</div>
                     </div>
@@ -602,7 +597,7 @@
                         <i class="fa-solid fa-caret-down" style="font-size: 12px;"></i>
                     </div>
                     
-                    <div class="dropdown profile-drop" id="drop-profile" style="display: none;">
+                    <div class="dropdown profile-drop" id="drop-profile">
                         <div class="drop-item"><i class="fa-regular fa-user-circle"></i> Hồ sơ</div>
                         <div class="drop-item"><i class="fa-solid fa-gear"></i> Điều chỉnh</div>
                         <a href="index.html" class="drop-item"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</a>
@@ -765,8 +760,6 @@
             var chuoi_hom_nay = dinh_dang_ngay(ngay_hien_tai);
             var tu_khoa = document.getElementById("search").value.toLowerCase();
             
-            khung_ngay.innerHTML = "";
-
             var sk_loc_duoc = [];
             for (var i = 0; i < ds_su_kien.length; i++) {
                 var su_kien = ds_su_kien[i];
@@ -774,6 +767,10 @@
                     sk_loc_duoc.push(su_kien);
                 }
             }
+
+            // Fix: Sử dụng biến gom mã HTML lại một lần để Lịch không bị lỗi render 
+            var html_ngay = "";
+
             for (var h = 0; h < 24; h++) {
                 var top = h * chieu_cao_hang;
                 var gio_chu = "";
@@ -783,8 +780,8 @@
                     gio_chu = h + ":00";
                 }
                 
-                khung_ngay.innerHTML += '<div class="hour-line" style="top:' + top + 'px" onclick="click_vao_gio(' + h + ')"></div>';
-                khung_ngay.innerHTML += '<div class="hour-label" style="top:' + top + 'px">' + gio_chu + '</div>';
+                html_ngay += '<div class="hour-line" style="top:' + top + 'px" onclick="click_vao_gio(' + h + ')"></div>';
+                html_ngay += '<div class="hour-label" style="top:' + top + 'px">' + gio_chu + '</div>';
             }
 
             for (var j = 0; j < sk_loc_duoc.length; j++) {
@@ -792,18 +789,20 @@
                 var thoi_gian_bat_dau = e.start.split(":");
                 var thoi_gian_ket_thuc = e.end.split(":");
                 
-                var top = (parseInt(thoi_gian_bat_dau[0]) * chieu_cao_hang) + parseInt(thoi_gian_bat_dau[1]);
-                var phut_bat_dau = parseInt(thoi_gian_bat_dau[0]) * 60 + parseInt(thoi_gian_bat_dau[1]);
-                var phut_ket_thuc = parseInt(thoi_gian_ket_thuc[0]) * 60 + parseInt(thoi_gian_ket_thuc[1]);
+                // Fix: Thay đổi parseInt thành Number để tránh lỗi hiểu lầm giờ (VD: giờ 08, 09) ở các máy khác nhau
+                var top = (Number(thoi_gian_bat_dau[0]) * chieu_cao_hang) + Number(thoi_gian_bat_dau[1]);
+                var phut_bat_dau = Number(thoi_gian_bat_dau[0]) * 60 + Number(thoi_gian_bat_dau[1]);
+                var phut_ket_thuc = Number(thoi_gian_ket_thuc[0]) * 60 + Number(thoi_gian_ket_thuc[1]);
                 
                 var chieu_cao = phut_ket_thuc - phut_bat_dau;
                 if (chieu_cao < 30) {
                     chieu_cao = 30; 
                 }
 
-                khung_ngay.innerHTML += '<div class="day-event ' + e.color + '" style="top:' + top + 'px; height:' + chieu_cao + 'px;"><strong>' + e.title + '</strong><br>' + e.start + ' - ' + e.end + '</div>';
+                html_ngay += '<div class="day-event ' + e.color + '" style="top:' + top + 'px; height:' + chieu_cao + 'px;"><strong>' + e.title + '</strong><br>' + e.start + ' - ' + e.end + '</div>';
             }
 
+            khung_ngay.innerHTML = html_ngay;
             khung_ngay.style.minHeight = (24 * chieu_cao_hang + 40) + "px";
         }
 
@@ -863,9 +862,9 @@
                     var thoi_gian_bat_dau = e_ngay.start.split(":");
                     var thoi_gian_ket_thuc = e_ngay.end.split(":");
                     
-                    var top = parseInt(thoi_gian_bat_dau[0]) * chieu_cao_hang + parseInt(thoi_gian_bat_dau[1]);
-                    var phut_bat_dau = parseInt(thoi_gian_bat_dau[0]) * 60 + parseInt(thoi_gian_bat_dau[1]);
-                    var phut_ket_thuc = parseInt(thoi_gian_ket_thuc[0]) * 60 + parseInt(thoi_gian_ket_thuc[1]);
+                    var top = Number(thoi_gian_bat_dau[0]) * chieu_cao_hang + Number(thoi_gian_bat_dau[1]);
+                    var phut_bat_dau = Number(thoi_gian_bat_dau[0]) * 60 + Number(thoi_gian_bat_dau[1]);
+                    var phut_ket_thuc = Number(thoi_gian_ket_thuc[0]) * 60 + Number(thoi_gian_ket_thuc[1]);
                     
                     var chieu_cao = phut_ket_thuc - phut_bat_dau;
                     if (chieu_cao < 20) {
@@ -924,7 +923,7 @@
         function dong_form() {
             document.getElementById("taskForm").style.display = "none";
             document.getElementById("formOverlay").style.display = "none";
-            document.getElementById("fTitle").value = ""; // Xóa tên cũ
+            document.getElementById("fTitle").value = ""; 
         }
 
         function them_su_kien() {
