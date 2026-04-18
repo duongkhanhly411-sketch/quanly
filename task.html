@@ -175,6 +175,61 @@
             font-size: 20px;
         }
 
+        /* Thêm lại CSS cho Dropdown Menu */
+        .noti-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .dropdown {
+            position: absolute;
+            background-color: #FFFFFF;
+            border: 2px solid #F5F5F7;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 100;
+        }
+
+        .noti-drop {
+            top: 60px;
+            right: 200px;
+            width: 280px;
+            padding: 15px;
+        }
+
+        .profile-drop {
+            top: 60px;
+            right: 0;
+            width: 230px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .drop-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            font-weight: 600;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .drop-item:hover {
+            background-color: #F5F5F7;
+            color: #546FFF;
+        }
+
         .page-content {
             flex: 1;
             position: relative;
@@ -306,7 +361,7 @@
                 <span>Nhóm 7</span>
             </div>
             <div class="nav-menu">
-                <a href="index.html" class="nav-item"><i class="fa-solid fa-border-all"></i> Overview</a>
+                <a href="overview.html" class="nav-item"><i class="fa-solid fa-border-all"></i> Overview</a>
                 <a href="task.html" class="nav-item active"><i class="fa-regular fa-file-lines"></i> Task</a>
                 <a href="#" class="nav-item"><i class="fa-regular fa-calendar"></i> Calendar</a>
             </div>
@@ -319,10 +374,26 @@
                     <input type="text" placeholder="Tìm kiếm tasks...">
                 </div>
                 <div class="header-actions">
-                    <div class="noti-btn"><i class="fa-regular fa-bell"></i></div>
-                    <div class="user-profile">
-                        <span>Xin chào, bạn!</span>
+                    <div class="noti-btn" id="btn-noti">
+                        <i class="fa-regular fa-bell"></i>
+                    </div>
+                    <div class="dropdown noti-drop" id="drop-noti">
+                        <div style="font-weight: 700; margin-bottom: 10px;">Thông báo</div>
+                        <div style="font-size: 14px;">Bạn không có thông báo nào.</div>
+                    </div>
+
+                    <div class="user-profile" id="btn-profile">
+                        <span class="greeting">Xin chào, bạn!</span>
                         <div class="avatar"><i class="fa-regular fa-user"></i></div>
+                        <i class="fa-solid fa-caret-down" style="font-size: 12px;"></i>
+                    </div>
+                    
+                    <div class="dropdown profile-drop" id="drop-profile">
+                        <div class="drop-item"><i class="fa-regular fa-user-circle"></i> Hồ sơ</div>
+                        <div class="drop-item"><i class="fa-solid fa-gear"></i> Điều chỉnh</div>
+                        <div class="drop-item" onclick="window.location.href='index.html'">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                        </div>
                     </div>
                 </div>
             </div>
@@ -332,22 +403,22 @@
                 <div class="task-section">
                     <div class="ts-header">
                         <h2>Dự án cá nhân</h2>
-                        <button class="btn-primary">+ Task Mới</button>
+                        <button class="btn-primary">+ Thêm mới</button>
                     </div>
                     <div class="task-list">
                         <div class="t-card">
                             <img class="t-img" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=300" alt="UI">
-                            <div class="t-title">Tạo Web UI</div>
-                            <div class="t-sub">Phát triển Web</div>
-                            <div class="prog-info"><span>Progress</span><span>85%</span></div>
+                            <div class="t-title">Thiết kế Web UI</div>
+                            <div class="t-sub">Web Development</div>
+                            <div class="prog-info"><span>Tiến độ</span><span>85%</span></div>
                             <div class="prog-track"><div class="prog-fill" style="width: 85%;"></div><div class="prog-thumb" style="left: calc(85% - 8px);"></div></div>
                             <div class="t-footer"><i class="fa-regular fa-clock"></i> Còn lại 4 giờ</div>
                         </div>
                         <div class="t-card">
                             <img class="t-img" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300" alt="Bug">
-                            <div class="t-title">Fixing Bugs</div>
-                            <div class="t-sub">Thiết kế Web</div>
-                            <div class="prog-info"><span>Progress</span><span>40%</span></div>
+                            <div class="t-title">Sửa lỗi (Fix Bugs)</div>
+                            <div class="t-sub">Frontend team</div>
+                            <div class="prog-info"><span>Tiến độ</span><span>40%</span></div>
                             <div class="prog-track"><div class="prog-fill" style="width: 40%;"></div><div class="prog-thumb" style="left: calc(40% - 8px);"></div></div>
                             <div class="t-footer"><i class="fa-regular fa-clock"></i> Còn 2 ngày</div>
                         </div>
@@ -356,23 +427,23 @@
 
                 <div class="task-section">
                     <div class="ts-header">
-                        <h2>Dự án của Team</h2>
-                        <button class="btn-primary">+ Dự án mới</button>
+                        <h2>Dự án nhóm</h2>
+                        <button class="btn-primary">+ Thêm mới</button>
                     </div>
                     <div class="task-list">
                         <div class="t-card">
                             <img class="t-img" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=300" alt="Team">
-                            <div class="t-title">Tạo WEB mới</div>
-                            <div class="t-sub">Xây WEB</div>
-                            <div class="prog-info"><span>Progress</span><span>85%</span></div>
+                            <div class="t-title">Thiết kế hệ thống</div>
+                            <div class="t-sub">Web Developer</div>
+                            <div class="prog-info"><span>Tiến độ</span><span>85%</span></div>
                             <div class="prog-track"><div class="prog-fill" style="width: 85%;"></div><div class="prog-thumb" style="left: calc(85% - 8px);"></div></div>
                             <div class="t-footer"><i class="fa-regular fa-clock"></i> Còn 4 ngày</div>
                         </div>
                         <div class="t-card">
                             <img class="t-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300" alt="Backend">
-                            <div class="t-title">Lập trình BackEnd</div>
-                            <div class="t-sub">Xây BackEnd</div>
-                            <div class="prog-info"><span>Progress</span><span>60%</span></div>
+                            <div class="t-title">Thiết lập Backend API</div>
+                            <div class="t-sub">Backend Developer</div>
+                            <div class="prog-info"><span>Tiến độ</span><span>60%</span></div>
                             <div class="prog-track"><div class="prog-fill" style="width: 60%;"></div><div class="prog-thumb" style="left: calc(60% - 8px);"></div></div>
                             <div class="t-footer"><i class="fa-regular fa-clock"></i> Còn 6 ngày</div>
                         </div>
@@ -383,5 +454,36 @@
         </div>
     </div>
 
+    <script>
+        var nut_profile = document.getElementById('btn-profile');
+        var bang_profile = document.getElementById('drop-profile');
+        var nut_noti = document.getElementById('btn-noti');
+        var bang_noti = document.getElementById('drop-noti');
+
+        nut_profile.onclick = function(event) {
+            event.stopPropagation();
+            if (bang_profile.style.display === 'block') {
+                bang_profile.style.display = 'none';
+            } else {
+                bang_profile.style.display = 'block';
+                bang_noti.style.display = 'none';
+            }
+        };
+
+        nut_noti.onclick = function(event) {
+            event.stopPropagation();
+            if (bang_noti.style.display === 'block') {
+                bang_noti.style.display = 'none';
+            } else {
+                bang_noti.style.display = 'block';
+                bang_profile.style.display = 'none';
+            }
+        };
+
+        document.onclick = function() {
+            bang_profile.style.display = 'none';
+            bang_noti.style.display = 'none';
+        };
+    </script>
 </body>
 </html>
