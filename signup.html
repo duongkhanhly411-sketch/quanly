@@ -7,31 +7,116 @@
     <link rel="icon" type="image/x-icon" href="taskicon.png">
 
     <style>
-        /* Gộp CSS */
-        html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden; }
-        body { background-color: #f3f4f6; font-family: Arial, sans-serif; color: #333; display: flex; justify-content: center; align-items: center; }
-        .container { width: 100%; max-width: 420px; text-align: center; padding: 20px; }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        body { 
+            background-color: #f3f4f6; 
+            font-family: Arial, sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container { 
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            padding: 20px; 
+        }
         
-        .login-card { background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd; text-align: left; }
-        .logo-placeholder.small { width: 50px; height: 50px; background-color: #ccc; border-radius: 50%; margin: 0 0 20px 0; }
+        .login-card { 
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .logo-placeholder.small { 
+            width: 50px;
+            height: 50px;
+            background-color: #ccc;
+            border-radius: 50%;
+            margin: 0 0 20px 0;
+        }
         
-        h1 { font-size: 24px; margin-bottom: 5px; }
-        .subtitle { font-size: 14px; margin-bottom: 25px; color: #666; }
-        .subtitle a { color: #333; text-decoration: underline; }
+        h1 { 
+            font-size: 24px;
+            margin-bottom: 5px; 
+        }
+        .subtitle { 
+            font-size: 14px;
+            margin-bottom: 25px;
+            color: #666; 
+        }
+        .subtitle a { 
+            color: #333;
+            text-decoration: underline;
+        }
         
-        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .input-group { margin-bottom: 15px; }
-        label { display: block; font-size: 13px; margin-bottom: 5px; color: #666; }
-        input, input[type="password"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        .row { 
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px; 
+        }
+        .input-group { 
+            margin-bottom: 15px; 
+        }
+        label { 
+            display: block;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        input, input[type="password"] { 
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
         
-        .hint { font-size: 11px; color: #888; margin-top: -10px; }
+        .hint { 
+            font-size: 11px;
+            color: #888;
+            margin-top: -10px;
+        }
         
-        .form-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; }
-        .alt-link { font-size: 14px; color: #333; text-decoration: underline; }
-        .btn-primary.round { width: auto; padding: 12px 30px; background-color: #111; color: white; border: none; border-radius: 30px; cursor: pointer; }
+        .form-footer { 
+            display: flex;
+            justify-content: space-between;
+            align-items: center; 
+            margin-top: 30px; 
+        }
+        .alt-link { 
+            font-size: 14px;
+            color: #333;
+            text-decoration: underline;
+        }
+        .btn-primary.round { 
+            width: auto;
+            padding: 12px 30px;
+            background-color: #111;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+        }
         
-        footer { margin-top: 40px; font-size: 12px; text-align: center; }
-        footer a { text-decoration: underline; color: #333; margin: 0 10px; }
+        footer {
+            margin-top: 40px;
+            font-size: 12px;
+            text-align: center;
+        }
+        footer a { 
+            text-decoration: underline;
+            color: #333;
+            margin: 0 10px; 
+        }
     </style>
 </head>
 <body>
@@ -86,7 +171,6 @@
     </div>
 
     <script>
-        // JS Gộp từ script.js (chỉ lấy phần xử lý Đăng ký)
         const signupForm = document.querySelector('#signupForm');
         if (signupForm) {
             signupForm.addEventListener('submit', (e) => {
@@ -96,7 +180,6 @@
                     alert("Passwords do not match!");
                 } else {
                     alert("Account created successfully!");
-                    // Tạo xong trỏ về trang đăng nhập
                     window.location.href = 'signin.html'; 
                 }
             });
