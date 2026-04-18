@@ -379,6 +379,39 @@
             border-color: #05cd99;
             color: white;
         }
+        @media (max-width: 768px) {
+            .app-container {
+                width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0; flex-direction: column;
+            }
+            .sidebar {
+                width: 100%; height: 80px; padding: 10px; flex-direction: row; justify-content: space-around;
+                align-items: center; border-radius: 20px 20px 0 0; order: 3; 
+                box-shadow: 0 -5px 20px rgba(0,0,0,0.05); position: fixed; bottom: 0; left: 0; z-index: 100;
+            }
+            .logo { display: none; }
+            .nav-menu { flex-direction: row; justify-content: space-around; width: 100%; gap: 0; }
+            .nav-item { flex-direction: column; padding: 5px 10px; font-size: 11px; gap: 5px; }
+            .nav-item i { font-size: 20px; margin: 0; }
+
+            .main-wrapper { padding: 15px; padding-bottom: 90px; }
+            .header { height: auto; padding: 15px; flex-wrap: wrap; flex-direction: row; }
+            .header-actions { width: 100%; justify-content: flex-end; order: 1; margin-bottom: 15px; }
+            .search-bar { width: 100%; order: 2; }
+            .noti-drop { right: 0; left: auto; width: 300px; max-width: 90vw; top: 60px; }
+            .profile-drop { right: 0; top: 60px; }
+            
+
+            .stats-row { grid-template-columns: 1fr 1fr; gap: 15px; }
+            .stat-card { height: 120px; }
+            .stat-num { font-size: 28px; }
+            .main-grid { grid-template-columns: 1fr; gap: 20px; }
+            .recent-card { flex-direction: column; height: auto; align-items: flex-start; }
+            .activity-tags { width: 100%; overflow-x: auto; padding-bottom: 10px; }
+            .chart-card { height: auto; }
+            .task-section { padding: 20px; }
+            .task-list { flex-direction: column; }
+            .t-card { min-width: 100%; height: auto; }
+
     </style>
 </head>
 <body>
