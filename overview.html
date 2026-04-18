@@ -31,24 +31,28 @@
         }
 
         .app-container {
-            width: 1440px;
-            height: 944px;
+            width: 96vw;           
+            max-width: 1440px;     
+            height: 92vh;        
+            max-height: 944px;
             background-color: #F3F4F8;
             border-radius: 20px;
             position: relative;
             box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            display: flex; 
             overflow: hidden;
-            display: flex;
         }
 
+       
         .sidebar {
-            width: 250px;
-            background-color: #FFFFFF;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            border-radius: 20px 0 0 20px;
+            width: 250px; 
+            background-color: #FFFFFF; 
+            padding: 30px 20px;   
+            display: flex; 
+            flex-direction: column; 
+            border-radius: 20px 0 0 20px; 
             z-index: 10;
+            overflow-y: auto;     
         }
 
         .logo {
