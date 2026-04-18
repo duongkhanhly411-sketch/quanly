@@ -6,7 +6,6 @@
     <title>Tasks - Group 7 Dashboard</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -155,6 +154,17 @@
             position: relative;
         }
 
+        .noti-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
         .user-profile {
             display: flex;
             align-items: center;
@@ -173,18 +183,6 @@
             align-items: center;
             justify-content: center;
             font-size: 20px;
-        }
-
-        /* Thêm lại CSS cho Dropdown Menu */
-        .noti-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 24px;
         }
 
         .dropdown {
@@ -223,6 +221,8 @@
             font-size: 18px;
             border-radius: 10px;
             cursor: pointer;
+            text-decoration: none;
+            color: #141522;
         }
 
         .drop-item:hover {
@@ -360,11 +360,11 @@
                 <i class="fa-solid fa-list-check"></i>
                 <span>Nhóm 7</span>
             </div>
-           <div class="nav-menu">
-    <a href="overview.html" class="nav-item"><i class="fa-solid fa-border-all"></i> Overview</a>
-    <a href="task.html" class="nav-item active"><i class="fa-regular fa-file-lines"></i> Task</a>
-    <a href="#" class="nav-item"><i class="fa-regular fa-calendar"></i> Calendar</a>
-</div>
+            <div class="nav-menu">
+                <a href="overview.html" class="nav-item"><i class="fa-solid fa-border-all"></i> Overview</a>
+                <a href="task.html" class="nav-item active"><i class="fa-regular fa-file-lines"></i> Task</a>
+                <a href="calendar.html" class="nav-item"><i class="fa-regular fa-calendar"></i> Calendar</a>
+            </div>
         </div>
 
         <div class="main-wrapper">
@@ -374,9 +374,7 @@
                     <input type="text" placeholder="Tìm kiếm tasks...">
                 </div>
                 <div class="header-actions">
-                    <div class="noti-btn" id="btn-noti">
-                        <i class="fa-regular fa-bell"></i>
-                    </div>
+                    <div class="noti-btn" id="btn-noti"><i class="fa-regular fa-bell"></i></div>
                     <div class="dropdown noti-drop" id="drop-noti">
                         <div style="font-weight: 700; margin-bottom: 10px;">Thông báo</div>
                         <div style="font-size: 14px;">Bạn không có thông báo nào.</div>
