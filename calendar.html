@@ -10,8 +10,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <style>
-        /* ================= CSS CƠ BẢN CỦA DASHBOARD ================= */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+
         body {
             background-color: #e5e5e5;
             font-family: 'Poppins', sans-serif;
@@ -22,120 +26,536 @@
             align-items: center;
             overflow: hidden;
         }
-        ::-webkit-scrollbar { display: none; }
+
+        ::-webkit-scrollbar { 
+            display: none; 
+        }
 
         .app-container {
-            width: 1440px; height: 944px;
+            width: 1440px; 
+            height: 944px;
             background-color: #F3F4F8;
             border-radius: 20px;
             position: relative;
             box-shadow: 0 15px 50px rgba(0,0,0,0.15);
-            display: flex; overflow: hidden;
+            display: flex; 
+            overflow: hidden;
         }
-
-        /* SIDEBAR CHUẨN CỦA NHÓM 7 */
         .sidebar {
-            width: 250px; background-color: #FFFFFF; padding: 40px 20px;
-            display: flex; flex-direction: column; border-radius: 20px 0 0 20px; z-index: 10;
+            width: 250px; 
+            background-color: #FFFFFF; 
+            padding: 40px 20px;
+            display: flex; 
+            flex-direction: column; 
+            border-radius: 20px 0 0 20px; 
+            z-index: 10;
         }
-        .logo { display: flex; align-items: center; margin-bottom: 60px; padding-left: 10px; }
-        .logo i { font-size: 32px; color: #141522; }
-        .logo span { font-family: 'Montserrat'; font-size: 32px; font-weight: 600; margin-left: 15px; }
-        .nav-menu { display: flex; flex-direction: column; gap: 15px; }
+
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            margin-bottom: 60px; 
+            padding-left: 10px; 
+        }
+
+        .logo i { 
+            font-size: 32px; 
+            color: #141522; 
+        }
+
+        .logo span { 
+            font-family: 'Montserrat'; 
+            font-size: 32px; 
+            font-weight: 600; 
+            margin-left: 15px; 
+        }
+
+        .nav-menu { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
+
         .nav-item {
-            display: flex; align-items: center; gap: 15px; padding: 15px 20px;
-            border-radius: 10px; font-size: 18px; font-weight: 600; cursor: pointer;
-            opacity: 0.6; text-decoration: none; color: #141522;
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            padding: 15px 20px;
+            border-radius: 10px; 
+            font-size: 18px; 
+            font-weight: 600; 
+            cursor: pointer;
+            opacity: 0.6; 
+            text-decoration: none; 
+            color: #141522;
         }
-        .nav-item:hover { opacity: 1; background-color: #f5f5f7; }
-        .nav-item.active { background-color: #F5F5F7; opacity: 1; }
-        .nav-item.active i { color: #546FFF; }
 
-        /* HEADER CHUẨN CỦA NHÓM 7 */
-        .main-wrapper { flex: 1; padding: 40px; display: flex; flex-direction: column; }
+        .nav-item:hover { 
+            opacity: 1; 
+            background-color: #f5f5f7; 
+        }
+
+        .nav-item.active { 
+            background-color: #F5F5F7; 
+            opacity: 1; 
+        }
+
+        .nav-item.active i { 
+            color: #546FFF; 
+        }
+
+        .main-wrapper { 
+            flex: 1; 
+            padding: 40px; 
+            display: flex; 
+            flex-direction: column; 
+        }
+
         .header {
-            height: 80px; background-color: #FFFFFF; border-radius: 20px;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 30px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); flex-shrink: 0;
+            height: 80px; 
+            background-color: #FFFFFF; 
+            border-radius: 20px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 0 30px; 
+            margin-bottom: 30px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02); 
+            flex-shrink: 0;
         }
-        .search-bar { background-color: #F5F5F7; width: 300px; height: 45px; border-radius: 30px; display: flex; align-items: center; padding: 0 20px; gap: 10px; }
-        .search-bar input { border: none; background: transparent; outline: none; font-family: 'Poppins'; font-size: 16px; width: 100%; }
-        .header-actions { display: flex; align-items: center; gap: 30px; position: relative; }
-        .noti-btn { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 24px; }
-        .user-profile { display: flex; align-items: center; gap: 15px; cursor: pointer; padding: 5px 10px; border-radius: 30px; }
-        .avatar { width: 45px; height: 45px; background-color: #e0e0e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-        
-        .dropdown { position: absolute; background-color: #FFFFFF; border: 2px solid #F5F5F7; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: none; z-index: 100; }
-        .noti-drop { top: 60px; right: 200px; width: 280px; padding: 15px; }
-        .profile-drop { top: 60px; right: 0; width: 230px; padding: 10px; display: flex; flex-direction: column; gap: 5px; }
-        .drop-item { display: flex; align-items: center; gap: 15px; padding: 12px 15px; font-weight: 600; font-size: 18px; border-radius: 10px; cursor: pointer; text-decoration: none; color: #141522; }
-        .drop-item:hover { background-color: #F5F5F7; color: #546FFF; }
 
-        /* ================= CSS RIÊNG CHO PHẦN LỊCH ================= */
-        .page-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        .search-bar { 
+            background-color: #F5F5F7; 
+            width: 300px; 
+            height: 45px; 
+            border-radius: 30px; 
+            display: flex; 
+            align-items: center; 
+            padding: 0 20px; 
+            gap: 10px; 
+        }
+
+        .search-bar input { 
+            border: none; 
+            background: transparent; 
+            outline: none; 
+            font-family: 'Poppins'; 
+            font-size: 16px; 
+            width: 100%; 
+        }
+
+        .header-actions { 
+            display: flex; 
+            align-items: center; 
+            gap: 30px; 
+            position: relative; 
+        }
+
+        .noti-btn { 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            font-size: 24px; 
+        }
+
+        .user-profile { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            cursor: pointer; 
+            padding: 5px 10px; 
+            border-radius: 30px; 
+        }
+
+        .avatar { 
+            width: 45px; 
+            height: 45px; 
+            background-color: #e0e0e0; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 20px; 
+        }
         
-        /* Thanh công cụ Lịch */
+        .dropdown { 
+            position: absolute; 
+            background-color: #FFFFFF; 
+            border: 2px solid #F5F5F7; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            display: none; 
+            z-index: 100; 
+        }
+
+        .noti-drop { 
+            top: 60px; 
+            right: 200px; 
+            width: 280px; 
+            padding: 15px; 
+        }
+
+        .profile-drop { 
+            top: 60px; 
+            right: 0; 
+            width: 230px; 
+            padding: 10px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 5px; 
+        }
+
+        .drop-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            padding: 12px 15px; 
+            font-weight: 600; 
+            font-size: 18px; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            text-decoration: none; 
+            color: #141522; 
+        }
+
+        .drop-item:hover { 
+            background-color: #F5F5F7; 
+            color: #546FFF; 
+        }
+
+        .page-content { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden; 
+        }
+        
         .cal-toolbar {
-            display: flex; justify-content: space-between; align-items: center;
-            background: white; padding: 15px 25px; border-radius: 16px; margin-bottom: 20px; flex-shrink: 0;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            background: white; 
+            padding: 15px 25px; 
+            border-radius: 16px; 
+            margin-bottom: 20px; 
+            flex-shrink: 0;
         }
         
-        .date-nav { display: flex; align-items: center; gap: 15px; }
-        .date-nav button { padding: 5px 12px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; background: white; font-size: 16px; }
-        .date-nav button:hover { background: #f3f4f6; }
-        #dateText { font-family: 'Poppins'; font-size: 18px; font-weight: 600; border: none; cursor: pointer; width: 200px; text-align: center; background: transparent; outline: none; }
+        .date-nav { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+        }
+
+        .date-nav button { 
+            padding: 5px 12px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            background: white; 
+            font-size: 16px; 
+        }
+
+        .date-nav button:hover { 
+            background: #f3f4f6; 
+        }
+
+        #dateText { 
+            font-family: 'Poppins'; 
+            font-size: 18px; 
+            font-weight: 600; 
+            border: none; 
+            cursor: pointer; 
+            width: 200px; 
+            text-align: center; 
+            background: transparent; 
+            outline: none; 
+        }
         
-        .view-toggle { display: flex; border: 1px solid #ddd; border-radius: 20px; overflow: hidden; }
-        .view-btn { padding: 8px 20px; border: none; cursor: pointer; background: white; font-family: 'Poppins'; font-size: 14px; font-weight: 500;}
-        .view-btn.active { background: #546FFF; color: white; }
+        .view-toggle { 
+            display: flex; 
+            border: 1px solid #ddd; 
+            border-radius: 20px; 
+            overflow: hidden; 
+        }
 
-        .btn-new { background: #546FFF; color: white; padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; font-family: 'Poppins'; font-weight: 500; font-size: 14px; }
-        .btn-new:hover { background: #3b52d9; }
+        .view-btn { 
+            padding: 8px 20px; 
+            border: none; 
+            cursor: pointer; 
+            background: white; 
+            font-family: 'Poppins'; 
+            font-size: 14px; 
+            font-weight: 500;
+        }
 
-        /* Day View */
-        #dayView { flex: 1; position: relative; background: white; border-radius: 16px; padding-left: 70px; overflow-y: auto; }
-        .hour-line { position: absolute; left: 0; right: 0; height: 1px; background: #eee; cursor: pointer; }
-        .hour-label { position: absolute; left: 15px; font-size: 12px; color: #999; cursor: pointer; transform: translateY(-50%); font-weight: 500; }
-        .day-event { position: absolute; left: 75px; right: 15px; border-radius: 8px; padding: 6px 12px; font-size: 13px; overflow: hidden; cursor: pointer; border-left: 4px solid rgba(0,0,0,0.2); }
+        .view-btn.active { 
+            background: #546FFF; 
+            color: white; 
+        }
 
-        /* Week View */
-        #weekView { flex: 1; display: none; background: white; border-radius: 16px; overflow: hidden; flex-direction: column; }
-        #weekView.show { display: flex; }
-        .wk-header { display: grid; grid-template-columns: 60px repeat(7, 1fr); border-bottom: 1px solid #e5e7eb; flex-shrink: 0; }
-        .wk-hcell { padding: 12px 4px; text-align: center; border-left: 1px solid #e5e7eb; }
-        .wk-hcell:first-child { border-left: none; }
-        .wk-hcell .dname { color: #999; font-size: 12px; text-transform: uppercase; margin-bottom: 5px; font-weight: 500;}
-        .wk-hcell .dnum { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-weight: 600; font-size: 16px; cursor: pointer; }
-        .wk-hcell .dnum:hover { background: #f3f4f6; }
-        .wk-hcell.is-today .dnum { background: #546FFF; color: white; }
+        .btn-new { 
+            background: #546FFF; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            font-family: 'Poppins'; 
+            font-weight: 500; 
+            font-size: 14px; 
+        }
 
-        .wk-body { display: flex; flex: 1; overflow-y: auto; }
-        .wk-timecol { width: 60px; flex-shrink: 0; position: relative; }
-        .wk-tlabel { position: absolute; right: 10px; font-size: 12px; color: #999; transform: translateY(-50%); font-weight: 500;}
-        .wk-days { flex: 1; display: grid; grid-template-columns: repeat(7, 1fr); position: relative; }
-        .wk-daycol { border-left: 1px solid #e5e7eb; position: relative; }
-        .wk-daycol:hover { background: #fafafa; }
-        .wk-hline { position: absolute; left: 0; right: 0; height: 1px; background: #eee; pointer-events: none; }
-        .wk-event { position: absolute; left: 4px; right: 4px; border-radius: 6px; padding: 4px 6px; font-size: 11px; overflow: hidden; cursor: pointer; border-left: 3px solid rgba(0,0,0,0.2); }
-        .wk-event .ev-name { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .btn-new:hover { 
+            background: #3b52d9; 
+        }
 
-        /* Colors cho sự kiện */
+        #dayView { 
+            flex: 1; 
+            position: relative; 
+            background: white; 
+            border-radius: 16px; 
+            padding-left: 70px; 
+            overflow-y: auto; 
+        }
+
+        .hour-line { 
+            position: absolute; 
+            left: 0; 
+            right: 0; 
+            height: 1px; 
+            background: #eee; 
+            cursor: pointer; 
+        }
+
+        .hour-label { 
+            position: absolute; 
+            left: 15px; 
+            font-size: 12px; 
+            color: #999; 
+            cursor: pointer; 
+            transform: translateY(-50%); 
+            font-weight: 500; 
+        }
+
+        .day-event { 
+            position: absolute; 
+            left: 75px; 
+            right: 15px; 
+            border-radius: 8px; 
+            padding: 6px 12px; 
+            font-size: 13px; 
+            overflow: hidden; 
+            cursor: pointer; 
+            border-left: 4px solid rgba(0,0,0,0.2); 
+        }
+
+        #weekView { 
+            flex: 1; 
+            display: none; 
+            background: white; 
+            border-radius: 16px; 
+            overflow: hidden; 
+            flex-direction: column; 
+        }
+
+        #weekView.show { 
+            display: flex; 
+        }
+
+        .wk-header { 
+            display: grid; 
+            grid-template-columns: 60px repeat(7, 1fr); 
+            border-bottom: 1px solid #e5e7eb; 
+            flex-shrink: 0; 
+        }
+
+        .wk-hcell { 
+            padding: 12px 4px; 
+            text-align: center; 
+            border-left: 1px solid #e5e7eb; 
+        }
+
+        .wk-hcell:first-child { 
+            border-left: none; 
+        }
+
+        .wk-hcell .dname { 
+            color: #999; 
+            font-size: 12px; 
+            text-transform: uppercase; 
+            margin-bottom: 5px; 
+            font-weight: 500;
+        }
+
+        .wk-hcell .dnum { 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin: 0 auto; 
+            font-weight: 600; 
+            font-size: 16px; 
+            cursor: pointer; 
+        }
+
+        .wk-hcell .dnum:hover { 
+            background: #f3f4f6; 
+        }
+
+        .wk-hcell.is-today .dnum { 
+            background: #546FFF; 
+            color: white; 
+        }
+
+        .wk-body { 
+            display: flex; 
+            flex: 1; 
+            overflow-y: auto; 
+        }
+
+        .wk-timecol { 
+            width: 60px; 
+            flex-shrink: 0; 
+            position: relative; 
+        }
+
+        .wk-tlabel { 
+            position: absolute; 
+            right: 10px; 
+            font-size: 12px; 
+            color: #999; 
+            transform: translateY(-50%); 
+            font-weight: 500;
+        }
+
+        .wk-days { 
+            flex: 1; 
+            display: grid; 
+            grid-template-columns: repeat(7, 1fr); 
+            position: relative; 
+        }
+
+        .wk-daycol { 
+            border-left: 1px solid #e5e7eb; 
+            position: relative; 
+        }
+
+        .wk-daycol:hover { 
+            background: #fafafa; 
+        }
+
+        .wk-hline { 
+            position: absolute; 
+            left: 0; 
+            right: 0; 
+            height: 1px; 
+            background: #eee; 
+            pointer-events: none; 
+        }
+
+        .wk-event { 
+            position: absolute; 
+            left: 4px; 
+            right: 4px; 
+            border-radius: 6px; 
+            padding: 4px 6px; 
+            font-size: 11px; 
+            overflow: hidden; 
+            cursor: pointer; 
+            border-left: 3px solid rgba(0,0,0,0.2); 
+        }
+
+        .wk-event .ev-name { 
+            font-weight: 600; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        }
+
         .blue   { background: #dbeafe; color: #1e40af; }
         .red    { background: #fee2e2; color: #b91c1c; }
         .green  { background: #dcfce7; color: #166534; }
         .yellow { background: #fef3c7; color: #854d0e; }
         .purple { background: #f3e8ff; color: #6b21a8; }
 
-        /* Popup Form Thêm Task */
-        .popup-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: 999; }
-        #taskForm { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 1000; width: 350px; font-family: 'Poppins'; }
-        #taskForm h3 { margin-bottom: 20px; text-align: center; }
-        #taskForm input { width: 100%; padding: 10px 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Poppins'; font-size: 14px; outline: none;}
-        #taskForm input:focus { border-color: #546FFF; }
-        .popup-btns { display: flex; gap: 10px; }
-        .popup-btns button { flex: 1; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-family: 'Poppins'; font-weight: 500; font-size: 14px; }
-        .btn-save { background: #546FFF; color: white; }
-        .btn-cancel { background: #e5e7eb; color: #333; }
+        .popup-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background: rgba(0,0,0,0.4); 
+            z-index: 999; 
+        }
+
+        #taskForm { 
+            display: none; 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%,-50%); 
+            background: white; 
+            padding: 25px; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+            z-index: 1000; 
+            width: 350px; 
+            font-family: 'Poppins'; 
+        }
+
+        #taskForm h3 { 
+            margin-bottom: 20px; 
+            text-align: center; 
+        }
+
+        #taskForm input { 
+            width: 100%; 
+            padding: 10px 15px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            font-family: 'Poppins'; 
+            font-size: 14px; 
+            outline: none;
+        }
+
+        #taskForm input:focus { 
+            border-color: #546FFF; 
+        }
+
+        .popup-btns { 
+            display: flex; 
+            gap: 10px; 
+        }
+
+        .popup-btns button { 
+            flex: 1; 
+            padding: 10px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-family: 'Poppins'; 
+            font-weight: 500; 
+            font-size: 14px; 
+        }
+
+        .btn-save { 
+            background: #546FFF; 
+            color: white; 
+        }
+
+        .btn-cancel { 
+            background: #e5e7eb; 
+            color: #333; 
+        }
     </style>
 </head>
 <body>
@@ -161,7 +581,7 @@
             <div class="header">
                 <div class="search-bar">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="search" placeholder="Tìm kiếm sự kiện trong lịch..." oninput="v_render()">
+                    <input type="text" id="search" placeholder="Tìm kiếm sự kiện trong lịch..." oninput="hien_thi_lich()">
                 </div>
                 
                 <div class="header-actions">
@@ -189,21 +609,20 @@
                 
                 <div class="cal-toolbar">
                     <div class="date-nav">
-                        <button onclick="v_changeDate(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button onclick="chuyen_ngay(-1)"><i class="fa-solid fa-chevron-left"></i></button>
                         <input id="dateText" readonly>
-                        <button onclick="v_changeDate(1)"><i class="fa-solid fa-chevron-right"></i></button>
+                        <button onclick="chuyen_ngay(1)"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
 
                     <div class="view-toggle">
-                        <button id="btnDay" class="view-btn active" onclick="v_setView('day')">Ngày</button>
-                        <button id="btnWeek" class="view-btn" onclick="v_setView('week')">Tuần</button>
+                        <button id="btnDay" class="view-btn active" onclick="chuyen_che_do_xem('day')">Ngày</button>
+                        <button id="btnWeek" class="view-btn" onclick="chuyen_che_do_xem('week')">Tuần</button>
                     </div>
 
-                    <button class="btn-new" onclick="v_openForm()">+ Sự kiện mới</button>
+                    <button class="btn-new" onclick="mo_form()">+ Sự kiện mới</button>
                 </div>
 
                 <div id="dayView"></div>
-                
                 <div id="weekView"></div>
 
             </div>
@@ -219,13 +638,12 @@
             <input id="fEnd" type="time" title="Giờ kết thúc">
         </div>
         <div class="popup-btns">
-            <button class="btn-save" onclick="v_addTask()">Lưu lại</button>
-            <button class="btn-cancel" onclick="v_closeForm()">Hủy</button>
+            <button class="btn-save" onclick="them_su_kien()">Lưu lại</button>
+            <button class="btn-cancel" onclick="dong_form()">Hủy</button>
         </div>
     </div>
 
     <script>
-        // 1. Quản lý Menu Header (Chung cho các trang)
         var nut_profile = document.getElementById('btn-profile');
         var bang_profile = document.getElementById('drop-profile');
         var nut_noti = document.getElementById('btn-noti');
@@ -233,249 +651,311 @@
 
         nut_profile.onclick = function(event) {
             event.stopPropagation();
-            if (bang_profile.style.display === 'block') { bang_profile.style.display = 'none'; } 
-            else { bang_profile.style.display = 'block'; bang_noti.style.display = 'none'; }
+            if (bang_profile.style.display === 'block') { 
+                bang_profile.style.display = 'none'; 
+            } else { 
+                bang_profile.style.display = 'block'; 
+                bang_noti.style.display = 'none'; 
+            }
         };
 
         nut_noti.onclick = function(event) {
             event.stopPropagation();
-            if (bang_noti.style.display === 'block') { bang_noti.style.display = 'none'; } 
-            else { bang_noti.style.display = 'block'; bang_profile.style.display = 'none'; }
+            if (bang_noti.style.display === 'block') { 
+                bang_noti.style.display = 'none'; 
+            } else { 
+                bang_noti.style.display = 'block'; 
+                bang_profile.style.display = 'none'; 
+            }
         };
 
-        // 2. LOGIC LỊCH LÀM VIỆC (Đã được format chuẩn)
-        var ds_su_kien = JSON.parse(localStorage.getItem("events")) || [];
-        var ngay_hien_tai = new Date(); 
-        ngay_hien_tai.setHours(0,0,0,0);
+        document.onclick = function(event) {
+    
+            bang_profile.style.display = 'none';
+            bang_noti.style.display = 'none';
+            
+            if (event.target.id === 'formOverlay') {
+                dong_form();
+            }
+        };
+
+        var ds_su_kien = JSON.parse(localStorage.getItem("events"));
+        if (ds_su_kien === null) {
+            ds_su_kien = [];
+        }
         
-        var che_do_xem = "day";
-        var chieu_cao_hang = 60; // 60px cho 1 giờ
+        var ngay_hien_tai = new Date(); 
+        ngay_hien_tai.setHours(0,0,0,0); 
+        
+        var che_do_xem = "day"; 
+        var chieu_cao_hang = 60; 
         var mau_sac = ["blue", "red", "green", "yellow", "purple"];
         var ten_ngay = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
 
-        // Cài đặt thư viện chọn ngày
         var bo_chon_ngay = flatpickr("#dateText", {
             defaultDate: ngay_hien_tai,
             dateFormat: "D, d M Y",
             onChange: function(ngay_duoc_chon) {
                 ngay_hien_tai = ngay_duoc_chon[0];
-                v_render();
+                hien_thi_lich();
             }
         });
 
-        // Định dạng ngày thành chuỗi yyyy-mm-dd
-        function v_dateStr(d) {
+        function dinh_dang_ngay(d) {
             var z = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
-            return z.toISOString().split("T")[0];
+            var chuoi_thoi_gian = z.toISOString();
+            return chuoi_thoi_gian.split("T")[0];
         }
 
-        // Lấy ngày thứ 2 đầu tuần
-        function v_getMonday(d) {
+        function lay_ngay_thu_hai(d) {
             var c = new Date(d);
-            var day = c.getDay();
-            var diff = c.getDate() - day + (day === 0 ? -6 : 1);
-            c.setDate(diff);
+            var thu_trong_tuan = c.getDay();
+            
+            var khoang_cach = 1;
+            if (thu_trong_tuan === 0) {
+                khoang_cach = -6;
+            }
+            
+            var ngay_chenh_lech = c.getDate() - thu_trong_tuan + khoang_cach;
+            c.setDate(ngay_chenh_lech);
             return c;
         }
-
-        // Chuyển đổi chế độ Ngày/Tuần
-        function v_setView(v) {
-            che_do_xem = v;
-            document.getElementById("btnDay").classList.toggle("active", v === "day");
-            document.getElementById("btnWeek").classList.toggle("active", v === "week");
-            document.getElementById("dayView").style.display = v === "day" ? "block" : "none";
-            document.getElementById("weekView").classList.toggle("show", v === "week");
-            v_render();
+        function chuyen_che_do_xem(che_do) {
+            che_do_xem = che_do;
+            
+            if (che_do === "day") {
+                document.getElementById("btnDay").classList.add("active");
+                document.getElementById("btnWeek").classList.remove("active");
+                document.getElementById("dayView").style.display = "block";
+                document.getElementById("weekView").classList.remove("show");
+            } else {
+                document.getElementById("btnWeek").classList.add("active");
+                document.getElementById("btnDay").classList.remove("active");
+                document.getElementById("dayView").style.display = "none";
+                document.getElementById("weekView").classList.add("show");
+            }
+            hien_thi_lich();
         }
 
-        // Thay đổi ngày (Nút Tới/Lùi)
-        function v_changeDate(n) {
+        function chuyen_ngay(so_ngay) {
             if (che_do_xem === "day") {
-                ngay_hien_tai.setDate(ngay_hien_tai.getDate() + n);
+                ngay_hien_tai.setDate(ngay_hien_tai.getDate() + so_ngay);
             } else {
-                ngay_hien_tai.setDate(ngay_hien_tai.getDate() + n * 7);
+                ngay_hien_tai.setDate(ngay_hien_tai.getDate() + (so_ngay * 7));
             }
             bo_chon_ngay.setDate(ngay_hien_tai, false);
-            v_render();
+            hien_thi_lich();
         }
-
-        // Hàm vẽ giao diện lịch
-        function v_render() {
+        function hien_thi_lich() {
             if (che_do_xem === "day") {
-                v_renderDay();
+                hien_thi_lich_ngay();
             } else {
-                v_renderWeek();
+                hien_thi_lich_tuan();
             }
         }
 
-        // Vẽ Lịch Ngày
-        function v_renderDay() {
+        function hien_thi_lich_ngay() {
             bo_chon_ngay.setDate(ngay_hien_tai, false);
             var khung_ngay = document.getElementById("dayView");
-            var chuoi_hom_nay = v_dateStr(ngay_hien_tai);
+            var chuoi_hom_nay = dinh_dang_ngay(ngay_hien_tai);
             var tu_khoa = document.getElementById("search").value.toLowerCase();
             
             khung_ngay.innerHTML = "";
 
-            var sk_loc_duoc = ds_su_kien.filter(function(e) {
-                return e.date === chuoi_hom_nay && e.title.toLowerCase().includes(tu_khoa);
-            });
-
-            // Vẽ các đường kẻ giờ (0h - 23h)
+            var sk_loc_duoc = [];
+            for (var i = 0; i < ds_su_kien.length; i++) {
+                var su_kien = ds_su_kien[i];
+                if (su_kien.date === chuoi_hom_nay && su_kien.title.toLowerCase().includes(tu_khoa)) {
+                    sk_loc_duoc.push(su_kien);
+                }
+            }
             for (var h = 0; h < 24; h++) {
                 var top = h * chieu_cao_hang;
-                var gio_chu = h < 10 ? "0" + h + ":00" : h + ":00";
-                khung_ngay.innerHTML += '<div class="hour-line" style="top:' + top + 'px" onclick="v_clickHour(' + h + ')"></div>';
+                var gio_chu = "";
+                if (h < 10) {
+                    gio_chu = "0" + h + ":00";
+                } else {
+                    gio_chu = h + ":00";
+                }
+                
+                khung_ngay.innerHTML += '<div class="hour-line" style="top:' + top + 'px" onclick="click_vao_gio(' + h + ')"></div>';
                 khung_ngay.innerHTML += '<div class="hour-label" style="top:' + top + 'px">' + gio_chu + '</div>';
             }
 
-            // Vẽ các khối sự kiện
-            sk_loc_duoc.forEach(function(e) {
+            for (var j = 0; j < sk_loc_duoc.length; j++) {
+                var e = sk_loc_duoc[j];
                 var thoi_gian_bat_dau = e.start.split(":");
                 var thoi_gian_ket_thuc = e.end.split(":");
                 
                 var top = (parseInt(thoi_gian_bat_dau[0]) * chieu_cao_hang) + parseInt(thoi_gian_bat_dau[1]);
-                var chieu_cao = (parseInt(thoi_gian_ket_thuc[0]) * 60 + parseInt(thoi_gian_ket_thuc[1])) - (parseInt(thoi_gian_bat_dau[0]) * 60 + parseInt(thoi_gian_bat_dau[1]));
-                if (chieu_cao < 30) chieu_cao = 30; // Chiều cao tối thiểu
+                var phut_bat_dau = parseInt(thoi_gian_bat_dau[0]) * 60 + parseInt(thoi_gian_bat_dau[1]);
+                var phut_ket_thuc = parseInt(thoi_gian_ket_thuc[0]) * 60 + parseInt(thoi_gian_ket_thuc[1]);
+                
+                var chieu_cao = phut_ket_thuc - phut_bat_dau;
+                if (chieu_cao < 30) {
+                    chieu_cao = 30; 
+                }
 
                 khung_ngay.innerHTML += '<div class="day-event ' + e.color + '" style="top:' + top + 'px; height:' + chieu_cao + 'px;"><strong>' + e.title + '</strong><br>' + e.start + ' - ' + e.end + '</div>';
-            });
+            }
 
             khung_ngay.style.minHeight = (24 * chieu_cao_hang + 40) + "px";
         }
 
-        // Vẽ Lịch Tuần
-        function v_renderWeek() {
-            var thu_hai = v_getMonday(ngay_hien_tai);
+        function hien_thi_lich_tuan() {
+            var thu_hai = lay_ngay_thu_hai(ngay_hien_tai);
             var cac_ngay = [];
-            for(var i=0; i<7; i++) {
+            
+            for(var i = 0; i < 7; i++) {
                 var d = new Date(thu_hai);
                 d.setDate(thu_hai.getDate() + i);
                 cac_ngay.push(d);
             }
 
-            var ngay_thuc_te = v_dateStr(new Date());
+            var ngay_thuc_te = dinh_dang_ngay(new Date());
             var tu_khoa = document.getElementById("search").value.toLowerCase();
             var tong_chieu_cao = 24 * chieu_cao_hang;
 
-            // Header Tuần
             var header_html = '<div class="wk-hcell"></div>';
-            cac_ngay.forEach(function(d) {
-                var is_today = v_dateStr(d) === ngay_thuc_te ? "is-today" : "";
-                header_html += '<div class="wk-hcell ' + is_today + '"><div class="dname">' + ten_ngay[d.getDay()] + '</div><div class="dnum" onclick="v_goDay(\'' + v_dateStr(d) + '\')">' + d.getDate() + '</div></div>';
-            });
-
-            // Cột Giờ
-            var timecol_html = "";
-            for (var h = 0; h < 24; h++) {
-                var gio_chu = h < 10 ? "0" + h + ":00" : h + ":00";
-                timecol_html += '<div class="wk-tlabel" style="top:' + (h * chieu_cao_hang) + 'px">' + gio_chu + '</div>';
+            for (var k = 0; k < cac_ngay.length; k++) {
+                var d_thu = cac_ngay[k];
+                var is_today = "";
+                if (dinh_dang_ngay(d_thu) === ngay_thuc_te) {
+                    is_today = "is-today";
+                }
+                header_html += '<div class="wk-hcell ' + is_today + '"><div class="dname">' + ten_ngay[d_thu.getDay()] + '</div><div class="dnum" onclick="den_ngay(\'' + dinh_dang_ngay(d_thu) + '\')">' + d_thu.getDate() + '</div></div>';
             }
 
-            // Các cột ngày trong tuần
+            var timecol_html = "";
+            for (var h = 0; h < 24; h++) {
+                var gio_chu = "";
+                if (h < 10) {
+                    gio_chu = "0" + h + ":00";
+                } else {
+                    gio_chu = h + ":00";
+                }
+                timecol_html += '<div class="wk-tlabel" style="top:' + (h * chieu_cao_hang) + 'px">' + gio_chu + '</div>';
+            }
             var daycols_html = "";
-            cac_ngay.forEach(function(d) {
-                var chuoi_ngay = v_dateStr(d);
-                var sk_ngay = ds_su_kien.filter(function(e) {
-                    return e.date === chuoi_ngay && e.title.toLowerCase().includes(tu_khoa);
-                });
-
+            for (var m = 0; m < cac_ngay.length; m++) {
+                var d_cot = cac_ngay[m];
+                var chuoi_ngay = dinh_dang_ngay(d_cot);
+                var sk_ngay = [];
+                for (var n = 0; n < ds_su_kien.length; n++) {
+                    var e_tuan = ds_su_kien[n];
+                    if (e_tuan.date === chuoi_ngay && e_tuan.title.toLowerCase().includes(tu_khoa)) {
+                        sk_ngay.push(e_tuan);
+                    }
+                }
                 var lines_html = "";
-                for (var h = 0; h < 24; h++) {
-                    lines_html += '<div class="wk-hline" style="top:' + (h * chieu_cao_hang) + 'px"></div>';
+                for (var h2 = 0; h2 < 24; h2++) {
+                    lines_html += '<div class="wk-hline" style="top:' + (h2 * chieu_cao_hang) + 'px"></div>';
                 }
 
                 var ev_html = "";
-                sk_ngay.forEach(function(e) {
-                    var thoi_gian_bat_dau = e.start.split(":");
-                    var thoi_gian_ket_thuc = e.end.split(":");
-                    var top = parseInt(thoi_gian_bat_dau[0]) * chieu_cao_hang + parseInt(thoi_gian_bat_dau[1]);
-                    var chieu_cao = Math.max((parseInt(thoi_gian_ket_thuc[0]) * 60 + parseInt(thoi_gian_ket_thuc[1])) - (parseInt(thoi_gian_bat_dau[0]) * 60 + parseInt(thoi_gian_bat_dau[1])), 20);
+                for (var y = 0; y < sk_ngay.length; y++) {
+                    var e_ngay = sk_ngay[y];
+                    var thoi_gian_bat_dau = e_ngay.start.split(":");
+                    var thoi_gian_ket_thuc = e_ngay.end.split(":");
                     
-                    ev_html += '<div class="wk-event ' + e.color + '" style="top:' + top + 'px; height:' + chieu_cao + 'px;" title="' + e.title + '"><div class="ev-name">' + e.title + '</div><div class="ev-time">' + e.start + '</div></div>';
-                });
+                    var top = parseInt(thoi_gian_bat_dau[0]) * chieu_cao_hang + parseInt(thoi_gian_bat_dau[1]);
+                    var phut_bat_dau = parseInt(thoi_gian_bat_dau[0]) * 60 + parseInt(thoi_gian_bat_dau[1]);
+                    var phut_ket_thuc = parseInt(thoi_gian_ket_thuc[0]) * 60 + parseInt(thoi_gian_ket_thuc[1]);
+                    
+                    var chieu_cao = phut_ket_thuc - phut_bat_dau;
+                    if (chieu_cao < 20) {
+                        chieu_cao = 20; 
+                    }
+                    
+                    ev_html += '<div class="wk-event ' + e_ngay.color + '" style="top:' + top + 'px; height:' + chieu_cao + 'px;" title="' + e_ngay.title + '"><div class="ev-name">' + e_ngay.title + '</div><div class="ev-time">' + e_ngay.start + '</div></div>';
+                }
 
-                daycols_html += '<div class="wk-daycol" style="height:' + tong_chieu_cao + 'px" onclick="v_clickHour(9, \'' + chuoi_ngay + '\')">' + lines_html + ev_html + '</div>';
-            });
-
-            document.getElementById("weekView").innerHTML = '<div class="wk-header">' + header_html + '</div><div class="wk-body"><div class="wk-timecol" style="height:' + tong_chieu_cao + 'px">' + timecol_html + '</div><div class="wk-days">' + daycols_html + '</div></div>';
+                daycols_html += '<div class="wk-daycol" style="height:' + tong_chieu_cao + 'px" onclick="click_vao_gio(9, \'' + chuoi_ngay + '\')">' + lines_html + ev_html + '</div>';
+            }
+            var vung_lich_tuan = document.getElementById("weekView");
+            vung_lich_tuan.innerHTML = '<div class="wk-header">' + header_html + '</div><div class="wk-body"><div class="wk-timecol" style="height:' + tong_chieu_cao + 'px">' + timecol_html + '</div><div class="wk-days">' + daycols_html + '</div></div>';
         }
 
-        // Chuyển sang xem 1 ngày cụ thể từ Lịch tuần
-        function v_goDay(chuoi_ngay) {
+        function den_ngay(chuoi_ngay) {
             var p = chuoi_ngay.split("-");
             ngay_hien_tai = new Date(p[0], p[1] - 1, p[2]);
-            v_setView("day");
+            chuyen_che_do_xem("day");
         }
 
-        // Mở popup thêm sự kiện
-        function v_clickHour(h, dateStr) {
+        function click_vao_gio(h, dateStr) {
             if (dateStr) {
                 var p = dateStr.split("-");
                 ngay_hien_tai = new Date(p[0], p[1] - 1, p[2]);
             }
-            var gio_bat_dau = h < 10 ? "0" + h + ":00" : h + ":00";
-            var gio_ket_thuc = (h + 1) < 10 ? "0" + (h + 1) + ":00" : (h + 1) + ":00";
+            
+            var gio_bat_dau = "";
+            if (h < 10) {
+                gio_bat_dau = "0" + h + ":00";
+            } else {
+                gio_bat_dau = h + ":00";
+            }
+            
+            var gio_ket_thuc = "";
+            if (h + 1 < 10) {
+                gio_ket_thuc = "0" + (h + 1) + ":00";
+            } else {
+                gio_ket_thuc = (h + 1) + ":00";
+            }
+            
+            if (gio_ket_thuc > "23:59") {
+                gio_ket_thuc = "23:59";
+            }
             
             document.getElementById("fStart").value = gio_bat_dau;
-            document.getElementById("fEnd").value = gio_ket_thuc > "23:59" ? "23:59" : gio_ket_thuc;
-            v_openForm();
+            document.getElementById("fEnd").value = gio_ket_thuc;
+            mo_form();
         }
 
-        function v_openForm() {
+        function mo_form() {
             document.getElementById("taskForm").style.display = "block";
             document.getElementById("formOverlay").style.display = "block";
-            bang_profile.style.display = 'none';
         }
 
-        function v_closeForm() {
+        function dong_form() {
             document.getElementById("taskForm").style.display = "none";
             document.getElementById("formOverlay").style.display = "none";
-            document.getElementById("fTitle").value = "";
+            document.getElementById("fTitle").value = ""; // Xóa tên cũ
         }
 
-        // Thêm Sự kiện vào LocalStorage
-        function v_addTask() {
+        function them_su_kien() {
             var tieu_de = document.getElementById("fTitle").value.trim();
             var bat_dau = document.getElementById("fStart").value;
             var ket_thuc = document.getElementById("fEnd").value;
-            
-            if (!tieu_de || !bat_dau || !ket_thuc) {
-                alert("Vui lòng nhập đủ thông tin!");
+ 
+            if (tieu_de === "" || bat_dau === "" || ket_thuc === "") {
+                alert("Vui lòng nhập đủ thông tin nhé!");
                 return;
             }
+      
             if (ket_thuc <= bat_dau) {
-                alert("Giờ kết thúc phải sau giờ bắt đầu!");
+                alert("Bạn ơi, giờ kết thúc phải sau giờ bắt đầu chứ!");
                 return;
             }
 
-            var mau_ngau_nhien = mau_sac[Math.floor(Math.random() * mau_sac.length)];
-            
-            ds_su_kien.push({ 
+            var chi_so_mau_ngau_nhien = Math.floor(Math.random() * mau_sac.length);
+            var mau_ngau_nhien = mau_sac[chi_so_mau_ngau_nhien];
+         
+            var obj_su_kien = { 
                 title: tieu_de, 
                 start: bat_dau, 
                 end: ket_thuc, 
-                date: v_dateStr(ngay_hien_tai), 
+                date: dinh_dang_ngay(ngay_hien_tai), 
                 color: mau_ngau_nhien 
-            });
-            
+            };
+            ds_su_kien.push(obj_su_kien);
+      
             localStorage.setItem("events", JSON.stringify(ds_su_kien));
-            v_closeForm();
-            v_render();
+            
+            dong_form();
+            hien_thi_lich(); 
         }
 
-        // Click ra ngoài để đóng Popup và Menu
-        document.addEventListener("click", function(e) {
-            if (!hop_menu.contains(e.target) && e.target !== nut_bam) {
-                hop_menu.style.display = 'none';
-            }
-            if (e.target.id === 'formOverlay') {
-                v_closeForm();
-            }
-        });
-
-        // Khởi chạy khi load trang
-        v_setView("day");
+        chuyen_che_do_xem("day");
     </script>
 </body>
 </html>
