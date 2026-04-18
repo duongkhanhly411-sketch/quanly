@@ -3,46 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Group 8</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Sign up - Group 7</title>
+    <link rel="icon" type="image/x-icon" href="taskicon.png">
+
     <style>
-        /* CSS tương tự trang login */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f3f4f8; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .signup-card { background-color: #ffffff; padding: 40px; border-radius: 8px; width: 400px; border: 1px solid #ddd; }
-        h1 { font-size: 28px; margin-bottom: 20px; }
+        /* Gộp CSS */
+        html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden; }
+        body { background-color: #f3f4f6; font-family: Arial, sans-serif; color: #333; display: flex; justify-content: center; align-items: center; }
+        .container { width: 100%; max-width: 420px; text-align: center; padding: 20px; }
+        
+        .login-card { background: white; padding: 30px; border-radius: 12px; border: 1px solid #ddd; text-align: left; }
+        .logo-placeholder.small { width: 50px; height: 50px; background-color: #ccc; border-radius: 50%; margin: 0 0 20px 0; }
+        
+        h1 { font-size: 24px; margin-bottom: 5px; }
+        .subtitle { font-size: 14px; margin-bottom: 25px; color: #666; }
+        .subtitle a { color: #333; text-decoration: underline; }
+        
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .input-group { margin-bottom: 15px; }
-        label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; }
-        input { width: 100%; height: 35px; padding: 0 10px; border: 1px solid #a6a6a6; border-radius: 3px; }
-        .btn-primary { width: 100%; height: 35px; background-color: #111; color: white; border-radius: 3px; cursor: pointer; margin-top: 10px; }
+        label { display: block; font-size: 13px; margin-bottom: 5px; color: #666; }
+        input, input[type="password"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        
+        .hint { font-size: 11px; color: #888; margin-top: -10px; }
+        
+        .form-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; }
+        .alt-link { font-size: 14px; color: #333; text-decoration: underline; }
+        .btn-primary.round { width: auto; padding: 12px 30px; background-color: #111; color: white; border: none; border-radius: 30px; cursor: pointer; }
+        
+        footer { margin-top: 40px; font-size: 12px; text-align: center; }
+        footer a { text-decoration: underline; color: #333; margin: 0 10px; }
     </style>
 </head>
 <body>
-    <div class="signup-card">
-        <h1>Create account</h1>
-        <form onsubmit="return v_signup(event)">
-            <div class="input-group">
-                <label>Your name</label>
-                <input type="text" required>
-            </div>
-            <div class="input-group">
-                <label>Email</label>
-                <input type="email" required>
-            </div>
-            <div class="input-group">
-                <label>Password</label>
-                <input type="password" placeholder="At least 6 characters" required>
-            </div>
-            <button type="submit" class="btn-primary">Create Account</button>
-        </form>
-        <p style="font-size: 13px; margin-top: 20px;">Already have an account? <a href="index.html">Sign in</a></p>
+    <div class="container">
+        <main class="login-card signup-card">
+            <div class="logo-placeholder small"></div>
+            <h1>Create an account</h1>
+            <p class="subtitle">Already have an account? <a href="signin.html">Log in</a></p>
+            
+            <form id="signupForm">
+                <div class="row">
+                    <div class="input-group">
+                        <label>First name</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Last name</label>
+                        <input type="text" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Email address</label>
+                    <input type="email" required>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Confirm your password</label>
+                        <input type="password" required>
+                    </div>
+                </div>
+
+                <p class="hint">Use 8 or more characters with a mix of letters, numbers & symbols</p>
+
+                <div class="form-footer">
+                    <a href="signin.html" class="alt-link">Log in instead</a>
+                    <button type="submit" class="btn-primary round">Create an account</button>
+                </div>
+            </form>
+        </main>
+
+        <footer class="bottom-nav">
+            <a href="#">Help Center</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+        </footer>
     </div>
+
     <script>
-        function v_signup(e) {
-            e.preventDefault();
-            alert("Account created successfully!");
-            window.location.href = "index.html";
-            return false;
+        // JS Gộp từ script.js (chỉ lấy phần xử lý Đăng ký)
+        const signupForm = document.querySelector('#signupForm');
+        if (signupForm) {
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault(); 
+                const passwords = signupForm.querySelectorAll('input[type="password"]');
+                if (passwords[0].value !== passwords[1].value) {
+                    alert("Passwords do not match!");
+                } else {
+                    alert("Account created successfully!");
+                    // Tạo xong trỏ về trang đăng nhập
+                    window.location.href = 'signin.html'; 
+                }
+            });
         }
     </script>
 </body>
