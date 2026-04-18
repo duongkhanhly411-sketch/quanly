@@ -826,4 +826,136 @@
                 header_html += '<div class="wk-hcell ' + is_today + '"><div class="dname">' + ten_ngay[d_thu.getDay()] + '</div><div class="dnum" onclick="den_ngay(\'' + dinh_dang_ngay(d_thu) + '\')">' + d_thu.getDate() + '</div></div>';
             }
 
-            var timecol
+            var timecol_html = "";
+            for (var h = 0; h < 24; h++) {
+                var gio_chu = "";
+                if (h < 10) {
+                    gio_chu = "0" + h + ":00";
+                } else {
+                    gio_chu = h + ":00";
+                }
+                timecol_html += '<div class="wk-tlabel" style="top:' + (h * chieu_cao_hang) + 'px">' + gio_chu + '</div>';
+            }
+            var daycols_html = "";
+            for (var m = 0; m < cac_ngay.length; m++) {
+                var d_cot = cac_ngay[m];
+                var chuoi_ngay = dinh_dang_ngay(d_cot);
+                var sk_ngay = [];
+                for (var n = 0; n < ds_su_kien.length; n++) {
+                    var e_tuan = ds_su_kien[n];
+                    if (e_tuan.date === chuoi_ngay && e_tuan.title.toLowerCase().includes(tu_khoa)) {
+                        sk_ngay.push(e_tuan);
+                    }
+                }
+                var lines_html = "";
+                for (var h2 = 0; h2 < 24; h2++) {
+                    lines_html += '<div class="wk-hline" style="top:' + (h2 * chieu_cao_hang) + 'px"></div>';
+                }
+
+                var ev_html = "";
+                for (var y = 0; y < sk_ngay.length; y++) {
+                    var e_ngay = sk_ngay[y];
+                    var thoi_gian_bat_dau = e_ngay.start.split(":");
+                    var thoi_gian_ket_thuc = e_ngay.end.split(":");
+                    
+                    var top = parseInt(thoi_gian_bat_dau[0]) * chieu_cao_hang + parseInt(thoi_gian_bat_dau[1]);
+                    var phut_bat_dau = parseInt(thoi_gian_bat_dau[0]) * 60 + parseInt(thoi_gian_bat_dau[1]);
+                    var phut_ket_thuc = parseInt(thoi_gian_ket_thuc[0]) * 60 + parseInt(thoi_gian_ket_thuc[1]);
+                    
+                    var chieu_cao = phut_ket_thuc - phut_bat_dau;
+                    if (chieu_cao < 20) {
+                        chieu_cao = 20; 
+                    }
+                    
+                    ev_html += '<div class="wk-event ' + e_ngay.color + '" style="top:' + top + 'px; height:' + chieu_cao + 'px;" title="' + e_ngay.title + '"><div class="ev-name">' + e_ngay.title + '</div><div class="ev-time">' + e_ngay.start + '</div></div>';
+                }
+
+                daycols_html += '<div class="wk-daycol" style="height:' + tong_chieu_cao + 'px" onclick="click_vao_gio(9, \'' + chuoi_ngay + '\')">' + lines_html + ev_html + '</div>';
+            }
+            var vung_lich_tuan = document.getElementById("weekView");
+            vung_lich_tuan.innerHTML = '<div class="wk-header">' + header_html + '</div><div class="wk-body"><div class="wk-timecol" style="height:' + tong_chieu_cao + 'px">' + timecol_html + '</div><div class="wk-days">' + daycols_html + '</div></div>';
+        }
+
+        function den_ngay(chuoi_ngay) {
+            var p = chuoi_ngay.split("-");
+            ngay_hien_tai = new Date(p[0], p[1] - 1, p[2]);
+            chuyen_che_do_xem("day");
+        }
+
+        function click_vao_gio(h, dateStr) {
+            if (dateStr) {
+                var p = dateStr.split("-");
+                ngay_hien_tai = new Date(p[0], p[1] - 1, p[2]);
+            }
+            
+            var gio_bat_dau = "";
+            if (h < 10) {
+                gio_bat_dau = "0" + h + ":00";
+            } else {
+                gio_bat_dau = h + ":00";
+            }
+            
+            var gio_ket_thuc = "";
+            if (h + 1 < 10) {
+                gio_ket_thuc = "0" + (h + 1) + ":00";
+            } else {
+                gio_ket_thuc = (h + 1) + ":00";
+            }
+            
+            if (gio_ket_thuc > "23:59") {
+                gio_ket_thuc = "23:59";
+            }
+            
+            document.getElementById("fStart").value = gio_bat_dau;
+            document.getElementById("fEnd").value = gio_ket_thuc;
+            mo_form();
+        }
+
+        function mo_form() {
+            document.getElementById("taskForm").style.display = "block";
+            document.getElementById("formOverlay").style.display = "block";
+        }
+
+        function dong_form() {
+            document.getElementById("taskForm").style.display = "none";
+            document.getElementById("formOverlay").style.display = "none";
+            document.getElementById("fTitle").value = ""; // Xóa tên cũ
+        }
+
+        function them_su_kien() {
+            var tieu_de = document.getElementById("fTitle").value.trim();
+            var bat_dau = document.getElementById("fStart").value;
+            var ket_thuc = document.getElementById("fEnd").value;
+ 
+            if (tieu_de === "" || bat_dau === "" || ket_thuc === "") {
+                alert("Vui lòng nhập đủ thông tin nhé!");
+                return;
+            }
+      
+            if (ket_thuc <= bat_dau) {
+                alert("Bạn ơi, giờ kết thúc phải sau giờ bắt đầu chứ!");
+                return;
+            }
+
+            var chi_so_mau_ngau_nhien = Math.floor(Math.random() * mau_sac.length);
+            var mau_ngau_nhien = mau_sac[chi_so_mau_ngau_nhien];
+         
+            var obj_su_kien = { 
+                title: tieu_de, 
+                start: bat_dau, 
+                end: ket_thuc, 
+                date: dinh_dang_ngay(ngay_hien_tai), 
+                color: mau_ngau_nhien 
+            };
+            ds_su_kien.push(obj_su_kien);
+      
+            localStorage.setItem("events", JSON.stringify(ds_su_kien));
+            
+            dong_form();
+            hien_thi_lich(); 
+        }
+
+        chuyen_che_do_xem("day");
+    </script>
+</body>
+</html>
