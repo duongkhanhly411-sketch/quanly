@@ -150,15 +150,11 @@
     </div>
 
     <script>
-        // Hàm đăng nhập (giữ nguyên của bạn)
         function v_login(e) {
             e.preventDefault();
-            // Code giả lập đăng nhập thành công nhảy vào Dashboard
             window.location.href = "overview.html";
             return false;
         }
-
-        // Thêm hàm ẩn/hiện mật khẩu viết theo chuẩn giáo trình
         function v_toggle_pass() {
             var o_mat_khau = document.getElementById("password");
             var nut_bam = document.getElementById("btnToggle");
