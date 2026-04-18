@@ -131,10 +131,20 @@
         .popup-btns button { flex: 1; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-family: 'Poppins'; font-weight: 500; font-size: 14px; }
         .btn-save { background: #546FFF; color: white; }
         .btn-cancel { background: #e5e7eb; color: #333; }
+        /* ---TỐI ƯU MOBILE  --- */
         @media (max-width: 768px) {
-            .app-container {
-                width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0; flex-direction: column;
+            body {
+                overflow-y: auto; 
             }
+            .app-container {
+                width: 100%; 
+                height: auto; 
+                max-height: none; 
+                border-radius: 0; 
+                flex-direction: column;
+                overflow: visible;
+            }
+            
             .sidebar {
                 width: 100%; height: 80px; padding: 10px; flex-direction: row; justify-content: space-around;
                 align-items: center; border-radius: 20px 20px 0 0; order: 3; 
@@ -145,13 +155,18 @@
             .nav-item { flex-direction: column; padding: 5px 10px; font-size: 11px; gap: 5px; }
             .nav-item i { font-size: 20px; margin: 0; }
 
-            .main-wrapper { padding: 15px; padding-bottom: 90px; }
-            .header { height: auto; padding: 15px; flex-wrap: wrap; flex-direction: row; }
+           
+            .main-wrapper { 
+                padding: 15px; 
+                padding-bottom: 110px;
+                overflow: visible;
+            }
+            .page-content { overflow: visible; }
+            .header { height: auto; padding: 15px; flex-wrap: wrap; flex-direction: row; margin-bottom: 20px; }
             .header-actions { width: 100%; justify-content: flex-end; order: 1; margin-bottom: 15px; }
             .search-bar { width: 100%; order: 2; }
             .noti-drop { right: 0; left: auto; width: 300px; max-width: 90vw; top: 60px; }
             .profile-drop { right: 0; top: 60px; }
-            
             .cal-toolbar { flex-direction: column; gap: 15px; align-items: stretch; }
             .date-nav { justify-content: space-between; width: 100%; }
             #dateText { font-size: 15px; width: 150px; }
